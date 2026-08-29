@@ -1,0 +1,8 @@
+{
+  "name": "@mgds/controller",
+  "version": "0.1.0-preview.1",
+  "type": "module",
+  "license": "Apache-2.0",
+  "exports": { "./jobs": "./src/jobs/job-controller.mjs" },
+  "scripts": { "test": "node --test test/**/*.test.mjs" }
+}

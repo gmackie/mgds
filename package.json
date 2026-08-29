@@ -11,7 +11,7 @@
     "pnpm": "11.10.0"
   },
   "scripts": {
-    "test": "node --test tests/**/*.test.mjs",
+    "test": "node --test tests/**/*.test.mjs packages/*/test/**/*.test.mjs",
     "validate:smoke": "node scripts/validate-smoke.mjs",
     "schemas:check": "node scripts/validate-schemas.mjs",
     "generate": "node tools/codegen/generate.mjs",

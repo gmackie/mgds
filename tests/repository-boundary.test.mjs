@@ -27,6 +27,7 @@ test("repository pins every public toolchain and smoke artifact", () => {
   const packageJson = JSON.parse(readFileSync("package.json", "utf8"));
   assert.equal(packageJson.private, true);
   assert.equal(packageJson.packageManager, "pnpm@11.10.0");
+  assert.match(packageJson.scripts.test, /packages\/\*\/test/);
   assert.equal(readFileSync(".node-version", "utf8").trim(), "24.20.0");
   assert.equal(readFileSync(".python-version", "utf8").trim(), "3.14.6");
   assert.equal(JSON.parse(readFileSync("global.json", "utf8")).sdk.version, "10.0.302");
