@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "0.1.0",
+  "description": "Synthetic Phase 0 threat-model fixtures. Values are intentionally non-secret and non-routable.",
+  "scenarios": [
+    {
+      "id": "MGDS-T01-credentials",
+      "category": "credentials",
+      "synthetic": true,
+      "input": { "authorization": "Bearer SYNTHETIC-NOT-A-SECRET" },
+      "expected": { "code": "mgds.privacy.prohibited-value", "persisted": false }
+    },
+    {
+      "id": "MGDS-T02-raw-paths",
+      "category": "raw-paths",
+      "synthetic": true,
+      "input": { "path": "/synthetic-home/project/Assets/Scene.unity" },
+      "expected": { "code": "mgds.privacy.raw-path", "replacement": "resource:scene/example" }
+    },
+    {
+      "id": "MGDS-T03-command-injection",
+      "category": "command-injection",
+      "synthetic": true,
+      "input": { "argument": "scene; SYNTHETIC_SIDE_EFFECT" },
+      "expected": { "code": "mgds.input.invalid-argument", "executed": false }
+    },
+    {
+      "id": "MGDS-T04-stale-approval",
+      "category": "stale-approval",
+      "synthetic": true,
+      "input": { "approvedDigest": "sha256:aaaa", "submittedDigest": "sha256:bbbb", "expired": true },
+      "expected": { "code": "mgds.policy.approval-invalid", "executed": false }
+    },
+    {
+      "id": "MGDS-T05-dependency-confusion",
+      "category": "dependency-confusion",
+      "synthetic": true,
+      "input": { "package": "vendor.invalid.synthetic", "requested": "latest", "locked": null },
+      "expected": { "code": "mgds.supply-chain.unpinned", "installed": false }
+    },
+    {
+      "id": "MGDS-T06-evaluator-tampering",
+      "category": "evaluator-tampering",
+      "synthetic": true,
+      "input": { "declaredDigest": "sha256:cccc", "observedDigest": "sha256:dddd" },
+      "expected": { "code": "mgds.integrity.digest-mismatch", "validRun": false }
+    }
+  ]
+}

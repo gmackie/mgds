@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MGDS v0 Privacy Contract</title>
+<style>
+body{max-width:82ch;margin:3rem auto;padding:0 1.25rem;background:#0b1515;color:#edf5f1;font:17px/1.65 system-ui,sans-serif}h1{color:#78e1a0}h2{margin-top:2.5rem;border-bottom:1px solid #294b3c;padding-bottom:.4rem}code{color:#b8f4ed;background:#132a26;padding:.1rem .3rem;border-radius:4px}table{border-collapse:collapse;width:100%}th,td{border-bottom:1px solid #294b3c;padding:.55rem;text-align:left;vertical-align:top}.deny{color:#ff999f}.status{color:#ffc766}</style>
+</head>
+<body>
+<p class="status">MGDS v0 research preview · normative privacy contract</p>
+<h1>Private by default, bounded by construction</h1>
+<p>Local execution is offline and private by default. Collection, persistence, model exposure, evaluation, signing, and publication are separate decisions. A transport or capability MUST NOT bypass the active privacy policy.</p>
+
+<h2>Prohibited persisted or published data</h2>
+<table><thead><tr><th>Class</th><th>Requirement</th></tr></thead><tbody>
+  <tr><td>Credential values</td><td class="deny">MUST NOT persist. Use an opaque broker handle and record only capability identity and outcome.</td></tr>
+  <tr><td>Transcript text</td><td class="deny">MUST NOT enter adapter output, evaluator fixtures, evidence, telemetry, or public results.</td></tr>
+  <tr><td>Personal identity</td><td class="deny">MUST NOT persist unless the user explicitly selects a documented attribution field for publication.</td></tr>
+  <tr><td>Raw local paths</td><td class="deny">MUST NOT cross the project boundary. Replace with project-scoped resource IDs and logical artifact names.</td></tr>
+  <tr><td>Unrelated source</td><td class="deny">MUST NOT be collected. Repository patches and excerpts are restricted to declared task/resource scope.</td></tr>
+  <tr><td>Unbounded telemetry</td><td class="deny">MUST NOT persist or enter model context. Apply projection, filters, pagination, sampling, aggregation, and byte/item/time limits.</td></tr>
+</tbody></table>
+
+<h2>Allowed data classes</h2>
+<ul>
+  <li><strong>Public:</strong> specification, public task metadata, redistributable golden assets, released schemas and scorecards.</li>
+  <li><strong>Project-scoped:</strong> bounded source excerpts, asset/resource identifiers, semantic snapshots, tests, captures, and builds required by a declared task.</li>
+  <li><strong>Evaluator-sealed:</strong> hidden assertions, reference outputs, private held-out task variants, and integrity keys.</li>
+  <li><strong>Ephemeral:</strong> brokered secret values, raw tool output awaiting redaction, process handles, and temporary paths. Ephemeral data has no persistence permission.</li>
+</ul>
+
+<h2>Mandatory processing pipeline</h2>
+<ol>
+  <li>Classify the source and requested fields before collection.</li>
+  <li>Enforce project/resource scope and observation bounds at the producer.</li>
+  <li>Normalize identifiers and remove credential, identity, transcript, raw-path, terminal-control, and unrelated-source fields.</li>
+  <li>Validate the sanitized object against its evidence schema before persistence.</li>
+  <li>Write atomically to content-addressed storage and record privacy class, producer, transformation, and digest.</li>
+  <li>Expose only policy-approved projections to the model and evaluator.</li>
+  <li>Require explicit user selection; the sanitized evidence bundle is previewed before signing or publication.</li>
+</ol>
+<p>Redaction MUST occur before persistence. Deleting a leaked value after writing does not satisfy this contract because content-addressed stores, logs, caches, backups, and signatures may retain it.</p>
+
+<h2>Retention and deletion</h2>
+<p>Local unsigned runs default to project-owned retention and MAY be deleted by digest. Published signed bundles are immutable; a withdrawn result publishes a tombstone and reason rather than silently changing history. Ephemeral data is destroyed at job termination or lease expiry. Hidden evaluator material follows the benchmark owner’s separately declared retention policy.</p>
+
+<h2>Failure behavior</h2>
+<p>Unknown privacy class, redaction failure, oversize data, invalid encoding, path escape, or suspected secret produces a terminal privacy error. The system fails closed, preserves only a bounded non-sensitive diagnostic, and does not sign or publish the run.</p>
+
+<h2>Conformance evidence</h2>
+<p>T0 privacy conformance includes synthetic credentials, synthetic local paths, identity fields, transcript-shaped text, terminal escapes, oversized graphs, and unrelated files. Fixtures MUST be demonstrably synthetic and MUST NOT contain developer, customer, host, or internal service details.</p>
+</body>
+</html>

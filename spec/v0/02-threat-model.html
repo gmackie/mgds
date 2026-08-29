@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MGDS v0 Threat Model</title>
+<style>
+body{max-width:84ch;margin:3rem auto;padding:0 1.25rem;background:#101018;color:#f0edf4;font:17px/1.65 system-ui,sans-serif}h1{color:#ffcb70}h2{margin-top:2.5rem;border-bottom:1px solid #433b52;padding-bottom:.4rem}h3{color:#c8a7ff}code{color:#b8f4ed;background:#172634;padding:.1rem .3rem;border-radius:4px}table{border-collapse:collapse;width:100%}th,td{border-bottom:1px solid #433b52;padding:.55rem;text-align:left;vertical-align:top}.high{color:#ff929a}.status{color:#ffcb70}.callout{border-left:4px solid #ff929a;background:#321d28;padding:1rem}</style>
+</head>
+<body>
+<p class="status">MGDS v0 research preview · normative security model</p>
+<h1>Threat model</h1>
+<div class="callout"><strong>Boundary:</strong> conformance means the declared controls are implemented and tested. It does not make arbitrary agent-generated code safe, certify release players, or remove the need for platform sandboxing and human review.</div>
+
+<h2>Protected assets</h2>
+<ul>
+  <li>Repository source, Unity assets, serialized scenes/prefabs, package locks, VCS history, and unrelated user work.</li>
+  <li>Credentials, licenses, signing material, private endpoints, identity, prompts, transcripts, and customer/project data.</li>
+  <li>Editor/player processes, build workers, host CPU/GPU/memory/disk, network, ports, and Unity seats.</li>
+  <li>Run manifests, policy grants, approvals, leases, event ledgers, artifacts, evaluator inputs, results, and signatures.</li>
+  <li>Published specification, packages, benchmark fixtures, hidden task confidentiality, and result comparability.</li>
+</ul>
+
+<h2>Threat actors</h2>
+<ul>
+  <li>A model or harness that is confused, over-broadly instructed, compromised, or intentionally adversarial.</li>
+  <li>Malicious or vulnerable project code, Unity package, importer, native plugin, evaluator, adapter, or dependency.</li>
+  <li>A concurrent local process or second agent racing the same workspace or Editor.</li>
+  <li>A result publisher attempting to alter evidence, hide failures, substitute evaluators, or misstate environment identity.</li>
+  <li>An external network peer attempting discovery spoofing, token theft, replay, injection, or resource exhaustion.</li>
+</ul>
+
+<h2>Trust boundaries</h2>
+<table><thead><tr><th>Boundary</th><th>Trusted responsibility</th><th>Untrusted input</th></tr></thead><tbody>
+  <tr><td>Harness → Controller</td><td>Schema validation, policy resolution, immutable run identity</td><td>Task text, tool calls, model output, proposed procedures</td></tr>
+  <tr><td>Controller → Unity adapter</td><td>Authenticated local channel, exact capability and approval binding</td><td>Procedure arguments, resource handles, project content</td></tr>
+  <tr><td>Unity adapter → Editor/project</td><td>Typed Unity API operations, preconditions, bounds, declared effects</td><td>Importers, scripts, packages, serialized assets, Editor callbacks</td></tr>
+  <tr><td>Player probe → Development player</td><td>Development-only build, scoped reads/actions, generation identity</td><td>Gameplay state, network traffic, project-provided callbacks</td></tr>
+  <tr><td>Producer → Artifact store</td><td>Redaction, bounds, atomic content-addressed persistence</td><td>Logs, captures, reports, builds, telemetry</td></tr>
+  <tr><td>Evidence → Evaluation sandbox</td><td>Digest verification, sealed evaluator, authoritative verdict</td><td>Agent-controlled project output and claimed success</td></tr>
+  <tr><td>Local run → Publication</td><td>User preview, explicit selection, signing, provenance</td><td>Any evidence not yet approved for public release</td></tr>
+</tbody></table>
+
+<h2>Threat catalog</h2>
+<h3 id="t01">MGDS-T01 — Ambient authority and credential disclosure <span class="high">High</span></h3>
+<p>A tool inherits host credentials, filesystem reach, or unrestricted networking, or emits a secret into logs/evidence. Required controls are deny-by-default capability grants, brokered short-lived opaque secret handles, allowlisted destinations, environment scrubbing, redaction before persistence, and negative leakage fixtures.</p>
+
+<h3 id="t02">MGDS-T02 — Workspace and privacy leakage <span class="high">High</span></h3>
+<p>Evidence contains raw local paths, identity, transcript text, unrelated source, or unbounded project graphs. Required controls are project-scoped opaque identifiers, structured privacy classes, bounded projections, path normalization, publication preview, and zero-retention defaults for prohibited data.</p>
+
+<h3 id="t03">MGDS-T03 — Command, code, and path injection <span class="high">High</span></h3>
+<p>Untrusted text crosses into shell, C# evaluation, package installation, file paths, terminal output, or Unity import hooks. Baseline MGDS excludes arbitrary shell/eval/package capabilities. Elevated profiles require argument-vector execution, path confinement, allowlists, sandboxing, terminal escape removal, resource limits, and exact approval.</p>
+
+<h3 id="t04">MGDS-T04 — Stale approval, replay, and concurrent mutation <span class="high">High</span></h3>
+<p>A changed procedure reuses an approval, a retry executes twice, or concurrent writers corrupt state. Controls are canonical procedure digests, expiry, idempotency keys, terminal result immutability, resource leases, optimistic precondition hashes, monotonic event ordering, cancellation, and verified recovery state.</p>
+
+<h3 id="t05">MGDS-T05 — Dependency and adapter supply chain <span class="high">High</span></h3>
+<p>A mutable package, spoofed namespace, compromised generator, or drifted Unity compatibility layer changes behavior. Controls are immutable pins and lockfiles, publisher provenance, package allowlists, license/vulnerability metadata, generated-code drift checks, isolated builds, signed releases, and conformance reruns after every dependency change.</p>
+
+<h3 id="t06">MGDS-T06 — Evaluator and evidence tampering <span class="high">High</span></h3>
+<p>An agent modifies hidden assertions, substitutes artifacts, omits events, or forges a passing report. Controls are evaluator isolation, sealed inputs, content-addressed artifacts, append-only ledger hashing, evaluator identity, signed published results, independent replay, and invalidation on any digest mismatch.</p>
+
+<h2>Required controls</h2>
+<ol>
+  <li>Every externally supplied document is schema-validated before use and bounded before model exposure.</li>
+  <li>Transport access grants no authority. Policy is deny-by-default and approvals bind exact immutable procedures.</li>
+  <li>Mutations declare risk and recovery level. Adapters may raise risk but never lower it.</li>
+  <li>Secrets and network are brokered capabilities. Raw values never enter manifests, logs, prompts, or evidence.</li>
+  <li>Jobs enforce deadlines, cancellation, budgets, heartbeats, lease expiry, and owned-process cleanup.</li>
+  <li>Artifacts are redacted, bounded, written atomically, hashed, and verified before evaluation or publication.</li>
+  <li>The evaluator is isolated from agent-controlled writes and is the authority for benchmark validity.</li>
+  <li>Release gates include negative authorization, recovery, privacy, supply-chain, and tampering tests.</li>
+</ol>
+
+<h2>Residual limitations</h2>
+<ul>
+  <li>Unity project code and importers execute native and managed behavior; OS/container isolation remains necessary.</li>
+  <li>Unity licensing, package registries, compilers, graphics drivers, and platform toolchains introduce external trust.</li>
+  <li>Visual, audio, accessibility, and creative judgments can expose media and require separate human review.</li>
+  <li>Deterministic seeds do not guarantee bit-identical physics, graphics, audio, or performance across hardware.</li>
+  <li>The research preview has no claim over store submission, production credentials, console platforms, or release players.</li>
+</ul>
+</body>
+</html>
