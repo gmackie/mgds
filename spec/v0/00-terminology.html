@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MGDS v0 Terminology</title>
+<style>
+body{max-width:78ch;margin:3rem auto;padding:0 1.25rem;background:#08121a;color:#e8f2f3;font:17px/1.65 system-ui,sans-serif}h1,h2{line-height:1.2}h1{color:#63e5e7}h2{margin-top:2.5rem;border-bottom:1px solid #28414d;padding-bottom:.4rem}dt{font-weight:750;color:#9df1e9;margin-top:1.1rem}dd{margin:.25rem 0 0 1.25rem}code{color:#b8f4ed;background:#112733;padding:.1rem .3rem;border-radius:4px}table{border-collapse:collapse;width:100%}th,td{border-bottom:1px solid #28414d;padding:.55rem;text-align:left;vertical-align:top}.status{color:#ffc766}</style>
+</head>
+<body>
+<p class="status">MGDS v0 research preview · normative vocabulary</p>
+<h1>Terminology</h1>
+<p>The key words MUST, MUST NOT, REQUIRED, SHOULD, SHOULD NOT, and MAY are normative requirements. MGDS defines a Unity-specific game-development environment; it does not redefine Unity products, model harnesses, or transports.</p>
+
+<h2>System roles</h2>
+<dl>
+  <dt>Controller</dt><dd>The host process that resolves policy, submits procedures, tracks jobs, coordinates leases and budgets, and assembles evidence. The controller is outside the Unity process.</dd>
+  <dt>Unity adapter</dt><dd>The conforming implementation inside or adjacent to a Unity Editor that maps MGDS capabilities onto Unity APIs. It is the authority for authoring/import state, not evaluation truth.</dd>
+  <dt>Player probe</dt><dd>An optional, bounded interface compiled only into development players. It exposes declared runtime observations and actions; it is absent from release players.</dd>
+  <dt>Task harness</dt><dd>The process that supplies an immutable task bundle, starting snapshot, policy profile, fixtures, budgets, and terminal conditions.</dd>
+  <dt>Evaluation sandbox</dt><dd>An isolated process that receives sealed task inputs and content-addressed evidence, executes visible and hidden assertions, and produces the authoritative validity verdict and scorecard.</dd>
+  <dt>Artifact store</dt><dd>A content-addressed store for immutable snapshots, events, logs, captures, test reports, profiler data, builds, attestations, and results.</dd>
+</dl>
+
+<h2>Managed resources</h2>
+<dl>
+  <dt>Project workspace</dt><dd>The durable root resource: one isolated Unity project plus its repository and artifact scope.</dd>
+  <dt>Resource</dt><dd>A typed object addressed by an opaque MGDS identifier. Resources include projects, editors, players, scenes, assets, objects, build targets, test runs, and package-provided subsystems.</dd>
+  <dt>Design-time identity</dt><dd>A durable identity derived from project data, such as an asset GUID and file identifier.</dd>
+  <dt>Runtime handle</dt><dd>An opaque, generation-scoped identity that becomes invalid when its owning player or play session ends.</dd>
+  <dt>Artifact</dt><dd>An immutable byte sequence identified by media type, byte length, digest, producer, privacy class, and provenance.</dd>
+</dl>
+
+<h2>Behavioral contract</h2>
+<dl>
+  <dt>Capability</dt><dd>A versioned declaration of one observable or actionable behavior, including schemas, resources, preconditions, effects, invariants, risk, authority, idempotency, timeout, cancellation, bounds, and artifacts.</dd>
+  <dt>Procedure</dt><dd>A typed invocation of a capability or an approved deterministic composition of capabilities. A procedure has immutable arguments and an idempotency key.</dd>
+  <dt>Job</dt><dd>The asynchronous lifecycle record for a submitted procedure. A job moves only through the transitions defined by the normative job state machine.</dd>
+  <dt>Observation</dt><dd>A bounded snapshot, causally ordered typed event, or immutable artifact that declares source, freshness, units, coordinate frame, correlation, and truncation.</dd>
+  <dt>Profile</dt><dd>A named set of requirements layered on core conformance, such as semantic state, multiplayer, performance, robustness, visual, audio, or accessibility.</dd>
+  <dt>Instrumentation level</dt><dd><code>L0</code> is generic Unity access, <code>L1</code> adds the MGDS semantic package, and <code>L2</code> adds a project/domain adapter.</dd>
+</dl>
+
+<h2>Authority and proof</h2>
+<dl>
+  <dt>Policy grant</dt><dd>A deny-by-default authorization bound to project, resource scope, mutation channel, risk ceiling, duration, and budget.</dd>
+  <dt>Approval</dt><dd>A time-bounded authorization bound to an exact procedure digest, arguments, expected effects, scope, and budget.</dd>
+  <dt>Lease</dt><dd>Exclusive, expiring ownership of a contention-sensitive resource such as Editor mutation, scene serialization, package resolution, build target, or play-mode control.</dd>
+  <dt>Evidence bundle</dt><dd>A content-addressed run manifest, append-only event ledger, artifacts, evaluator identity, result, and optional signature.</dd>
+  <dt>Environment conformance</dt><dd>A T0 verdict about an adapter/environment implementation, reported separately from model-agent performance.</dd>
+</dl>
+
+<h2>Terminology collision rules</h2>
+<table><thead><tr><th>Do not overload</th><th>MGDS term</th></tr></thead><tbody>
+  <tr><td>Unity CLI</td><td>Controller or transport projection</td></tr>
+  <tr><td>Pipeline</td><td>Unity adapter or execution lifecycle</td></tr>
+  <tr><td>Agent</td><td>Model harness, gameplay entity, or ML-Agents behavior—state which one</td></tr>
+  <tr><td>Environment</td><td>Project workspace, evaluation sandbox, or learning environment—state which one</td></tr>
+  <tr><td>Command</td><td>Capability, procedure, CLI subcommand, MCP tool, or player action—state which one</td></tr>
+  <tr><td>Runtime</td><td>Player probe or controller runtime—state which one</td></tr>
+  <tr><td>PlayMode</td><td>Editor play state or Unity Test Framework platform—state which one</td></tr>
+</tbody></table>
+<p>An MGDS specification or implementation MUST NOT use “Unity CLI” as an MGDS component name. It MAY identify Unity CLI as one host transport. The same rule applies to Unity Pipeline and MCP: integrations are named explicitly and are not the normative MGDS contract.</p>
+</body>
+</html>

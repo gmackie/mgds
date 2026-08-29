@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MGDS v0 Architecture</title>
+<style>
+body{max-width:82ch;margin:3rem auto;padding:0 1.25rem;background:#08121a;color:#e8f2f3;font:17px/1.65 system-ui,sans-serif}h1{color:#63e5e7}h2{margin-top:2.5rem;border-bottom:1px solid #28414d;padding-bottom:.4rem}h3{color:#bca0ff}code{color:#b8f4ed;background:#112733;padding:.1rem .3rem;border-radius:4px}.card{border:1px solid #28414d;border-radius:10px;padding:1rem;margin:1rem 0;background:#0d1c26}.status{color:#ffc766}table{border-collapse:collapse;width:100%}th,td{border-bottom:1px solid #28414d;padding:.55rem;text-align:left;vertical-align:top}</style>
+</head>
+<body>
+<p class="status">MGDS v0 research preview · normative architecture</p>
+<h1>Unity environment architecture</h1>
+<p>MGDS standardizes the complete Unity inner development loop: inspect, modify, compile, play, interact, observe, test, profile, build, and prove. The schema and lifecycle contract are canonical. CLI, MCP, and language SDKs are projections and MUST preserve the same authorization, job, error, and evidence semantics.</p>
+
+<h2>Durable root and resource graph</h2>
+<p>The Project workspace is the durable root. Editors, players, test runners, build workers, build targets, scenes, assets, objects, and package-defined subsystems are subordinate typed Resources. All externally visible resource identifiers are opaque and project-scoped. Raw paths are adapter-private implementation details.</p>
+
+<h2>Required components</h2>
+<div class="card"><h3>Controller</h3><p>Loads the run and policy manifests, negotiates versions, acquires leases, submits idempotent procedures, enforces budgets, tracks jobs, and records the append-only event ledger. It MUST NOT author evaluator verdicts.</p></div>
+<div class="card"><h3>Unity adapter</h3><p>Runs at the Unity API boundary. It discovers capabilities, resolves resource identities, evaluates preconditions, executes typed Editor operations, and emits bounded observations. Experimental Unity CLI/Pipeline details MUST remain behind its compatibility module.</p></div>
+<div class="card"><h3>Player probe</h3><p>Provides bounded runtime observations and declared actions in development players only. The probe MUST authenticate the local controller, enforce profile limits, and invalidate runtime handles on generation changes.</p></div>
+<div class="card"><h3>Task harness</h3><p>Supplies immutable start state, task, fixtures, policy, budgets, required artifacts, visible assertions, and terminal conditions. Hidden assertions remain sealed for the Evaluation sandbox.</p></div>
+<div class="card"><h3>Evaluation sandbox</h3><p>Runs independently from agent-controlled code. It verifies input and artifact digests, executes evaluators, applies evidence authority, and signs the validity verdict and scorecard for published results.</p></div>
+<div class="card"><h3>Artifact store</h3><p>Persists immutable, content-addressed artifacts and provenance. It rejects path escapes, partial writes, digest mismatch, unbounded payloads, and privacy classes prohibited by the active policy.</p></div>
+
+<h2>Four state planes</h2>
+<table><thead><tr><th>Plane</th><th>Authority</th><th>Synchronization boundary</th></tr></thead><tbody>
+  <tr><td>Repository and artifact plane</td><td>VCS identity and content hashes</td><td>Durable across process restarts; source writes use optimistic precondition hashes.</td></tr>
+  <tr><td>Authoring and import plane</td><td>Unity Editor APIs</td><td>Observations declare import, refresh, and compilation freshness.</td></tr>
+  <tr><td>Gameplay and runtime plane</td><td>Owning play session or development player</td><td>Generation-scoped; frames, ticks, monotonic time, and source identity are explicit.</td></tr>
+  <tr><td>Independent evaluation plane</td><td>Sealed evaluator</td><td>Consumes immutable artifacts and outranks agent-side success claims.</td></tr>
+</tbody></table>
+
+<h2>Capability tiers and mutation channels</h2>
+<p>Core Unity capabilities cover discovery, project/assets, scenes, objects/components, compile, play, deterministic input, logs, captures, tests, coverage, performance, and builds. Optional profiles cover semantic state/events/assertions, multiplayer, robustness, visual, audio, and accessibility evidence.</p>
+<p>Mutations MUST identify one channel: repository patch, typed Editor operation, or player-input action. Arbitrary shell, package installation, and C# evaluation are not baseline capabilities and require an elevated, sandboxed profile.</p>
+
+<h2>Run data flow</h2>
+<ol>
+  <li>The Task harness sends an immutable task and run manifest to the Controller.</li>
+  <li>The Controller negotiates capabilities and resolves deny-by-default policy.</li>
+  <li>The Controller acquires leases and submits an idempotent Procedure to the Unity adapter.</li>
+  <li>The Unity adapter reports job progress and writes bounded observations to the Artifact store.</li>
+  <li>The Controller seals the evidence bundle without adding evaluation claims.</li>
+  <li>The Evaluation sandbox verifies digests, executes assertions, and emits the authoritative result.</li>
+</ol>
+
+<h2>Authority ordering</h2>
+<p>When evidence conflicts, authority is: isolated evaluator assertions; semantic state and typed events; compiler, test, and build output; bounded visual/audio evidence; model-agent narrative. Lower-authority evidence aids diagnosis but cannot overturn higher-authority failure.</p>
+
+<h2>Conformance boundary</h2>
+<p>T0 certifies the adapter/environment independently. T1–T3 benchmark model harnesses against a named immutable conforming environment. A combined result MUST preserve both identities and MUST NOT convert an environment failure into an agent score.</p>
+
+<h2>Normative non-goals</h2>
+<p>MGDS v0 does not claim cross-engine support, MHS compatibility, store or cloud deployment authority, console certification, machine authority over creative quality, or a required hosted service. Release players MUST NOT contain the reference Player probe.</p>
+</body>
+</html>
