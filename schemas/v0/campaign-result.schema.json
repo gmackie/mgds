@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mgds.dev/schemas/v0/campaign-result.schema.json",
+  "title": "MGDS campaign result",
+  "type": "object",
+  "required": ["campaignId", "status", "metrics", "failures"],
+  "properties": {
+    "campaignId": { "type": "string", "pattern": "^mgds\\.campaign\\.[a-z0-9.-]+@[0-9]+\\.[0-9]+\\.[0-9]+$" },
+    "status": { "enum": ["pass", "incomplete", "invalid"] },
+    "metrics": {
+      "type": "object",
+      "required": ["expectedRuns", "recordedRuns", "missingRuns", "validRuns", "t0PassRate", "seedAgreement", "orphanProcesses", "unknownWorkspaceStates"],
+      "properties": {
+        "expectedRuns": { "type": "integer", "minimum": 1 },
+        "recordedRuns": { "type": "integer", "minimum": 0 },
+        "missingRuns": { "type": "integer", "minimum": 0 },
+        "validRuns": { "type": "integer", "minimum": 0 },
+        "t0PassRate": { "type": "number", "minimum": 0, "maximum": 1 },
+        "seedAgreement": { "type": "number", "minimum": 0, "maximum": 1 },
+        "orphanProcesses": { "type": "integer", "minimum": 0 },
+        "unknownWorkspaceStates": { "type": "integer", "minimum": 0 }
+      },
+      "additionalProperties": false
+    },
+    "missingSlotIds": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1, "maxLength": 512 }
+    },
+    "failures": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1, "maxLength": 1024 }
+    }
+  },
+  "additionalProperties": false
+}

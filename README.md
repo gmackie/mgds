@@ -33,7 +33,32 @@ uv sync --frozen
 pnpm check
 pnpm conformance:t0
 pnpm unity:test
+pnpm campaign:plan
+# Intentionally exits non-zero until all external P2 gates are satisfied:
+pnpm release:p2:check
 ```
+
+`campaign:plan` seals the task, benchmark policy, golden-project lockfiles, and
+Unity toolchain into a deterministic 90-slot Codex/Claude × host × seed ×
+repetition matrix. `campaign:evaluate` accepts only records matching those
+sealed slots and fails on missing fairness, cleanup, provenance, or threshold
+evidence. Every accepted run needs an evaluator signature from an externally
+pinned key, and each host/harness pair needs a signed 240-minute soak record.
+The evaluator signature covers the complete run provenance record. Evidence
+bundle bytes are resolved through `results/p2/evidence.json`, hashed,
+schema-validated, privacy-checked, and replayed before aggregation. Each bundle
+must contain the task-declared compile, tests, event-ledger, screenshot, and
+player-build evidence roles; summary flags cannot substitute for replay.
+The release gate also requires `MGDS_RELEASE_SOURCE_DIGEST` so GitHub
+host attestations, independent review, and the final release signature are
+pinned to one clean source commit with tracked release inputs.
+Review approval, reviewer/release public keys, and the final signature live as
+detached content-addressed artifacts under ignored `artifacts/release/p2/`, so
+approving or signing a commit never changes that commit.
+The release signature binds the candidate, recomputed campaign, verified host
+provenance, review report, and trust fingerprints as one release subject. The
+authority registries are deliberately empty until governance appoints them;
+their trusted fingerprints must be supplied out of band.
 
 Start with [the quickstart](docs/quickstart.html), then read
 [adapter authoring](docs/adapter-authoring.html),

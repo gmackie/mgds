@@ -34,6 +34,13 @@ test('publication rejects secrets, identities, raw paths, and transcript text re
     { note: 'token=ghp_abcdefghijklmnopqrstuvwxyz123456' },
     { note: '/Users/alice/private-game/Assets' },
     { note: 'C:\\Users\\Alice\\SecretGame' },
+    { note: '/Volumes/dev/private-game/Assets' },
+    { note: '/tmp/mgds-private/output' },
+    { note: 'D:\\Games\\PrivateProject\\Assets' },
+    { note: '\\\\build-server\\private-share\\game' },
+    { note: 'C:/Users/alice/private-game/Assets' },
+    { note: 'cwd=/Volumes/dev/private-game' },
+    { note: 'file:///tmp/private-game/output' },
     { userEmail: 'person@example.test' },
     { transcript: 'the agent said this' },
   ];

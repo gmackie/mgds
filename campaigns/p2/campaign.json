@@ -1,1 +1,28 @@
-{"id":"mgds.campaign.p2@0.1.0","status":"configured","seeds":[1337,7331,424242],"harnesses":["codex","claude-code"],"hosts":["macos-arm64","linux-x64","windows-x64"],"repeatRuns":5,"soakMinutes":240,"thresholds":{"seedAgreement":1,"t0PassRate":1,"orphanProcesses":0,"unknownWorkspaceStates":0}}
+{
+  "id": "mgds.campaign.p2@0.1.0",
+  "status": "configured",
+  "tasks": [
+    {
+      "id": "mgds.golden-arena.key-exit@0.1.0",
+      "path": "benchmarks/tasks/t1/key-exit/task.json"
+    }
+  ],
+  "environmentInputs": [
+    "profiles/benchmark.policy.json",
+    "toolchains/unity-6000.3.9f1.json",
+    "benchmarks/golden-arena/Packages/manifest.json",
+    "benchmarks/golden-arena/Packages/packages-lock.json",
+    "benchmarks/golden-arena/ProjectSettings/ProjectVersion.txt"
+  ],
+  "seeds": [1337, 7331, 424242],
+  "harnesses": ["codex", "claude-code"],
+  "hosts": ["macos-arm64", "linux-x64", "windows-x64"],
+  "repeatRuns": 5,
+  "soakMinutes": 240,
+  "thresholds": {
+    "seedAgreement": 1,
+    "t0PassRate": 1,
+    "orphanProcesses": 0,
+    "unknownWorkspaceStates": 0
+  }
+}

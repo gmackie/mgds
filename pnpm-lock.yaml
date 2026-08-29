@@ -22,6 +22,15 @@ importers:
 
   packages/broker: {}
 
+  packages/campaign:
+    dependencies:
+      '@mgds/redaction':
+        specifier: workspace:*
+        version: link:../redaction
+      ajv:
+        specifier: 8.17.1
+        version: 8.17.1
+
   packages/controller: {}
 
   packages/evaluator: {}
@@ -35,6 +44,15 @@ importers:
   packages/protocol-ts: {}
 
   packages/redaction: {}
+
+  packages/release:
+    dependencies:
+      '@mgds/attestation':
+        specifier: workspace:*
+        version: link:../attestation
+      '@mgds/campaign':
+        specifier: workspace:*
+        version: link:../campaign
 
   packages/report: {}
 

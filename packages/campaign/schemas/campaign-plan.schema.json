@@ -1,0 +1,143 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mgds.dev/schemas/v0/campaign-plan.schema.json",
+  "title": "MGDS campaign plan",
+  "type": "object",
+  "required": [
+    "campaignId",
+    "thresholds",
+    "soakMinutes",
+    "slots"
+  ],
+  "properties": {
+    "campaignId": {
+      "type": "string",
+      "pattern": "^mgds\\.campaign\\.[a-z0-9.-]+@[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "thresholds": {
+      "type": "object",
+      "required": [
+        "seedAgreement",
+        "t0PassRate",
+        "orphanProcesses",
+        "unknownWorkspaceStates"
+      ],
+      "properties": {
+        "seedAgreement": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "t0PassRate": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "orphanProcesses": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "unknownWorkspaceStates": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "soakMinutes": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 1440
+    },
+    "slots": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "required": [
+          "slotId",
+          "campaignId",
+          "taskId",
+          "taskHash",
+          "budgetHash",
+          "environmentHash",
+          "requiredEvidence",
+          "buildTarget",
+          "host",
+          "harness",
+          "seed",
+          "repetition"
+        ],
+        "properties": {
+          "slotId": {
+            "type": "string",
+            "minLength": 16,
+            "maxLength": 512
+          },
+          "campaignId": {
+            "type": "string",
+            "pattern": "^mgds\\.campaign\\.[a-z0-9.-]+@[0-9]+\\.[0-9]+\\.[0-9]+$"
+          },
+          "taskId": {
+            "type": "string",
+            "pattern": "^mgds\\.[a-z0-9.-]+@[0-9]+\\.[0-9]+\\.[0-9]+$"
+          },
+          "taskHash": {
+            "$ref": "#/$defs/hash"
+          },
+          "budgetHash": {
+            "$ref": "#/$defs/hash"
+          },
+          "environmentHash": {
+            "$ref": "#/$defs/hash"
+          },
+          "requiredEvidence": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9-]{1,63}$"
+            }
+          },
+          "buildTarget": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z][a-z0-9-]*$"
+          },
+          "host": {
+            "enum": [
+              "macos-arm64",
+              "linux-x64",
+              "windows-x64"
+            ]
+          },
+          "harness": {
+            "enum": [
+              "codex",
+              "claude-code"
+            ]
+          },
+          "seed": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "repetition": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "$defs": {
+    "hash": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    }
+  },
+  "additionalProperties": false
+}

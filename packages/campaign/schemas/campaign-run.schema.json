@@ -1,0 +1,320 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mgds.dev/schemas/v0/campaign-run.schema.json",
+  "title": "MGDS campaign run record",
+  "type": "object",
+  "required": [
+    "slotId",
+    "campaignId",
+    "taskId",
+    "taskHash",
+    "budgetHash",
+    "environmentHash",
+    "requiredEvidence",
+    "buildTarget",
+    "host",
+    "harness",
+    "seed",
+    "repetition",
+    "runId",
+    "model",
+    "verdict",
+    "workspaceState",
+    "orphanProcesses",
+    "evidenceHash",
+    "privateAffordances",
+    "durationMinutes",
+    "soak",
+    "evaluator",
+    "evidenceAttestation"
+  ],
+  "properties": {
+    "slotId": {
+      "type": "string",
+      "minLength": 16,
+      "maxLength": 512
+    },
+    "campaignId": {
+      "type": "string",
+      "pattern": "^mgds\\.campaign\\.[a-z0-9.-]+@[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "taskId": {
+      "type": "string",
+      "pattern": "^mgds\\.[a-z0-9.-]+@[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "taskHash": {
+      "$ref": "#/$defs/hash"
+    },
+    "budgetHash": {
+      "$ref": "#/$defs/hash"
+    },
+    "environmentHash": {
+      "$ref": "#/$defs/hash"
+    },
+    "requiredEvidence": {
+      "$ref": "#/$defs/evidenceRoles"
+    },
+    "buildTarget": {
+      "$ref": "#/$defs/buildTarget"
+    },
+    "host": {
+      "enum": [
+        "macos-arm64",
+        "linux-x64",
+        "windows-x64"
+      ]
+    },
+    "harness": {
+      "enum": [
+        "codex",
+        "claude-code"
+      ]
+    },
+    "seed": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "repetition": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "runId": {
+      "type": "string",
+      "pattern": "^run_[A-Za-z0-9_-]{16,}$"
+    },
+    "model": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 120
+    },
+    "verdict": {
+      "enum": [
+        "valid",
+        "invalid",
+        "inconclusive"
+      ]
+    },
+    "workspaceState": {
+      "enum": [
+        "known-clean",
+        "known-dirty",
+        "unknown"
+      ]
+    },
+    "orphanProcesses": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "evidenceHash": {
+      "$ref": "#/$defs/hash"
+    },
+    "privateAffordances": {
+      "const": false
+    },
+    "durationMinutes": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "maximum": 1440
+    },
+    "soak": {
+      "type": "boolean"
+    },
+    "evaluator": {
+      "$ref": "#/$defs/evaluator"
+    },
+    "evidenceAttestation": {
+      "type": "object",
+      "required": [
+        "algorithm",
+        "authority",
+        "payload",
+        "signature"
+      ],
+      "properties": {
+        "algorithm": {
+          "const": "Ed25519"
+        },
+        "authority": {
+          "type": "string",
+          "pattern": "^mgds\\.evaluator\\.[a-z0-9.-]+@[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "payload": {
+          "type": "object",
+          "required": [
+            "slotId",
+            "campaignId",
+            "taskId",
+            "taskHash",
+            "budgetHash",
+            "environmentHash",
+            "requiredEvidence",
+            "buildTarget",
+            "host",
+            "harness",
+            "seed",
+            "repetition",
+            "runId",
+            "model",
+            "evidenceHash",
+            "verdict",
+            "workspaceState",
+            "orphanProcesses",
+            "privateAffordances",
+            "durationMinutes",
+            "soak",
+            "evaluatorId",
+            "evaluatorDigest"
+          ],
+          "properties": {
+            "slotId": {
+              "type": "string",
+              "minLength": 16,
+              "maxLength": 512
+            },
+            "campaignId": {
+              "type": "string",
+              "pattern": "^mgds\\.campaign\\.[a-z0-9.-]+@[0-9]+\\.[0-9]+\\.[0-9]+$"
+            },
+            "taskId": {
+              "type": "string",
+              "pattern": "^mgds\\.[a-z0-9.-]+@[0-9]+\\.[0-9]+\\.[0-9]+$"
+            },
+            "taskHash": {
+              "$ref": "#/$defs/hash"
+            },
+            "budgetHash": {
+              "$ref": "#/$defs/hash"
+            },
+            "environmentHash": {
+              "$ref": "#/$defs/hash"
+            },
+            "requiredEvidence": {
+              "$ref": "#/$defs/evidenceRoles"
+            },
+            "buildTarget": {
+              "$ref": "#/$defs/buildTarget"
+            },
+            "host": {
+              "enum": [
+                "macos-arm64",
+                "linux-x64",
+                "windows-x64"
+              ]
+            },
+            "harness": {
+              "enum": [
+                "codex",
+                "claude-code"
+              ]
+            },
+            "seed": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "repetition": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "runId": {
+              "type": "string",
+              "pattern": "^run_[A-Za-z0-9_-]{16,}$"
+            },
+            "model": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 120
+            },
+            "evidenceHash": {
+              "$ref": "#/$defs/hash"
+            },
+            "verdict": {
+              "enum": [
+                "valid",
+                "invalid",
+                "inconclusive"
+              ]
+            },
+            "workspaceState": {
+              "enum": [
+                "known-clean",
+                "known-dirty",
+                "unknown"
+              ]
+            },
+            "orphanProcesses": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "privateAffordances": {
+              "const": false
+            },
+            "durationMinutes": {
+              "type": "number",
+              "exclusiveMinimum": 0,
+              "maximum": 1440
+            },
+            "soak": {
+              "type": "boolean"
+            },
+            "evaluatorId": {
+              "type": "string",
+              "pattern": "^mgds\\.evaluator\\.[a-z0-9.-]+@[0-9]+\\.[0-9]+\\.[0-9]+$"
+            },
+            "evaluatorDigest": {
+              "$ref": "#/$defs/hash"
+            }
+          },
+          "additionalProperties": false
+        },
+        "signature": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]{40,}$"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "$defs": {
+    "hash": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "evidenceRoles": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9-]{1,63}$"
+      }
+    },
+    "buildTarget": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^[a-z][a-z0-9-]*$"
+    },
+    "evaluator": {
+      "type": "object",
+      "required": [
+        "id",
+        "digest",
+        "authority"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^mgds\\.evaluator\\.[a-z0-9.-]+@[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "digest": {
+          "$ref": "#/$defs/hash"
+        },
+        "authority": {
+          "const": "independent-evaluator"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

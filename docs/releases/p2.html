@@ -1,1 +1,12 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><title>MGDS P2 Candidate</title><body><main><h1>MGDS P2 research-preview candidate</h1><p>The engineering candidate contains the public protocol, implementations, benchmarks, hardening layers, harness contracts, and documentation. It is not a signed P2 release until independent review, cross-platform Unity campaign evidence, immutable artifact identities, and release-authority signing are complete.</p></main></body></html>
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<title>MGDS P2 Candidate</title>
+<body><main>
+<h1>MGDS P2 research-preview candidate</h1>
+<p>The engineering candidate contains the public protocol, implementations, benchmarks, hardening layers, harness contracts, and documentation. It is not a signed P2 release until independent review, cross-platform Unity campaign evidence, immutable artifact identities, and release-authority signing are complete.</p>
+<h2>Machine-enforced gate</h2>
+<p><code>pnpm release:p2:check</code> requires a clean checkout matching <code>MGDS_RELEASE_SOURCE_DIGEST</code> with every source-bound engineering and campaign input tracked, regenerates the sealed campaign plan from repository bytes, resolves and replays the bounded, schema-valid, privacy-safe evidence bundles named by <code>results/p2/evidence.json</code>, evaluates <code>results/p2/runs.json</code>, cryptographically verifies the local host artifacts named by <code>results/p2/host-t0.json</code> against that source digest, hashes the actual review report and verifies its release-target signature, and checks the version-specific signing record. The command exits non-zero for any missing, malformed, unverified, or unresolved input. A claimed campaign summary, an attestation URL, an asserted replay flag, or an edited candidate status cannot promote the release.</p>
+<p>The evaluator registry is a source-bound campaign input. Review approval, the review report, reviewer and release-authority public-key registries, and the final signing record are detached under <code>artifacts/release/p2/</code>, which is ignored by version control. This prevents review and signing from changing the source commit they approve. Their exact bytes and trust fingerprints are still bound into the review target and final release subject. The committed files in <code>security/</code> and <code>versions/</code> are pending templates only.</p>
+<p>Appointment and insertion of Ed25519 public keys are governance actions. Trusted key fingerprints must arrive through the documented out-of-band environment variables, and private signing material must never enter this repository.</p>
+</main></body></html>

@@ -1,1 +1,18 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><title>MGDS Result Reproduction</title><body><main><h1>Result reproduction</h1><p>Verify sealed task and evaluator identities, replay the event hash chain, hash every artifact byte, verify the Ed25519 attestation, then compare authoritative assertions. Agent narrative and agent-authored verdicts are non-authoritative.</p></main></body></html>
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<title>MGDS Result Reproduction</title>
+<body><main>
+<h1>Result reproduction</h1>
+<p>Verify sealed task and evaluator identities, replay the event hash chain, hash every artifact byte, verify the Ed25519 attestation, then compare authoritative assertions. Agent narrative and agent-authored verdicts are non-authoritative.</p>
+<h2>P2 campaign</h2>
+<pre><code>pnpm campaign:plan
+# Place the array of harness run records at artifacts/campaigns/p2-runs.json
+pnpm campaign:evaluate
+pnpm release:p2:check</code></pre>
+<p>The plan is derived from repository bytes and contains the exact 90-slot P2 Cartesian matrix. Evaluation rejects unexpected or duplicate slots, substituted task, budget, environment, model, harness, host, seed, or repetition provenance, private harness affordances, malformed provenance, unsigned evaluator verdicts, non-repeatable seeds, missing 240-minute host/harness soak coverage, orphan processes, and unknown workspace state. A missing slot is reported as incomplete rather than silently excluded.</p>
+<p>Each run names a content hash in <code>results/p2/evidence.json</code>. The evaluator bounds file and campaign size before reading, checks every runtime document against the normative schemas, checks the raw bundle hash, applies the publication privacy contract, replays the event hash chain, and decodes and re-hashes every embedded artifact. The exact task-declared <code>compile</code>, <code>tests</code>, <code>event-ledger</code>, <code>screenshot</code>, and <code>player-build</code> roles are mandatory. A claimed replay status is never sufficient on its own.</p>
+<p>The P2 release check is expected to exit non-zero while external evidence is pending. Host artifacts are checked with <code>gh attestation verify</code> against the exact repository, conformance workflow, <code>refs/heads/main</code>, and release source digest; URL strings are not evidence. Review approval must sign the content hash of the actual report with an externally pinned reviewer key.</p>
+<p>Set <code>MGDS_TRUSTED_EVALUATOR_FINGERPRINTS</code> and <code>MGDS_TRUSTED_REVIEWER_FINGERPRINTS</code> to JSON maps, <code>MGDS_RELEASE_AUTHORITY_FINGERPRINT</code> to the out-of-band SHA-256 fingerprint, and <code>MGDS_RELEASE_SOURCE_DIGEST</code> to the exact Git commit SHA. Run the gate from a clean checkout of that commit; every release input and evidence bundle must be tracked there. The independent reviewer signs a target hash covering the candidate, source, campaign, host evidence, and evaluator trust. The final Ed25519 signature then covers one release-subject hash binding all of those inputs plus the exact review report and reviewer trust.</p>
+<p>Review and signing are intentionally detached from the source commit. Place <code>review.json</code>, <code>review.html</code>, <code>reviewer-authorities.json</code>, <code>release-authorities.json</code>, and <code>signing.json</code> in <code>artifacts/release/p2/</code>. Once the source, campaign, host evidence, and evaluator trust inputs are complete, the blocked gate output publishes the stable <code>reviewTargetHash</code>; after review approval is present, it publishes the final <code>releaseSubjectHash</code> for signing. Because <code>artifacts/</code> is ignored, neither action changes the approved source digest.</p>
+</main></body></html>

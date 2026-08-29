@@ -10,6 +10,11 @@ const schemas = await Promise.all(definitions.map(async (name) => ({
   name,
   schema: JSON.parse(await readFile(`schemas/v0/${name}.schema.json`, 'utf8')),
 })));
+const campaignSchemaNames = ['campaign-plan', 'campaign-run', 'campaign-evidence', 'campaign-evidence-index'];
+const campaignSchemas = await Promise.all(campaignSchemaNames.map(async (name) => ({
+  name,
+  content: `${JSON.stringify(JSON.parse(await readFile(`schemas/v0/${name}.schema.json`, 'utf8')), null, 2)}\n`,
+})));
 
 const pascal = (value) => value.split(/[-_.]/).map((part) => part[0].toUpperCase() + part.slice(1)).join('');
 
@@ -107,6 +112,7 @@ const outputs = new Map([
   ['packages/protocol-py/mgds_protocol/generated.py', pythonSource()],
   ['Packages/org.mgds.unity.core/Runtime/Generated/MgdsProtocol.g.cs', csharpSource()],
 ]);
+for (const { name, content } of campaignSchemas) outputs.set(`packages/campaign/schemas/${name}.schema.json`, content);
 
 let stale = false;
 for (const [target, content] of outputs) {

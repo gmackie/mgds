@@ -1,0 +1,15 @@
+{
+  "campaignId": "mgds.campaign.p2@0.1.0",
+  "status": "incomplete",
+  "metrics": {
+    "expectedRuns": 90,
+    "recordedRuns": 0,
+    "missingRuns": 90,
+    "validRuns": 0,
+    "t0PassRate": 0,
+    "seedAgreement": 0,
+    "orphanProcesses": 0,
+    "unknownWorkspaceStates": 0
+  },
+  "failures": []
+}

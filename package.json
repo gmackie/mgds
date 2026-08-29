@@ -11,12 +11,15 @@
     "pnpm": "11.10.0"
   },
   "scripts": {
-    "test": "node --test tests/**/*.test.mjs packages/*/test/**/*.test.mjs",
+    "test": "node --test tests/**/*.test.mjs packages/*/test/*.test.mjs packages/*/test/**/*.test.mjs",
     "validate:smoke": "node scripts/validate-smoke.mjs",
     "schemas:check": "node scripts/validate-schemas.mjs",
     "generate": "node tools/codegen/generate.mjs",
     "generated:check": "node tools/codegen/generate.mjs --check",
     "conformance:t0": "node scripts/run-t0.mjs --host local --output artifacts/conformance/local.json",
+    "campaign:plan": "node scripts/plan-campaign.mjs --config campaigns/p2/campaign.json --output artifacts/campaigns/p2-plan.json",
+    "campaign:evaluate": "node scripts/evaluate-campaign.mjs --plan artifacts/campaigns/p2-plan.json --runs artifacts/campaigns/p2-runs.json --evidence artifacts/campaigns/p2-evidence.json --evaluators versions/evaluator-authorities.json --output artifacts/campaigns/p2-result.json",
+    "release:p2:check": "node scripts/check-p2-release.mjs --candidate versions/v0.1.0-preview.1.json --config campaigns/p2/campaign.json --runs results/p2/runs.json --evidence results/p2/evidence.json --hosts results/p2/host-t0.json --review artifacts/release/p2/review.json --review-report artifacts/release/p2/review.html --signing artifacts/release/p2/signing.json --evaluators versions/evaluator-authorities.json --reviewers artifacts/release/p2/reviewer-authorities.json --release-authorities artifacts/release/p2/release-authorities.json --output artifacts/release/p2-gate.json",
     "unity:test": "uv run python scripts/run-unity-package-tests.py --package Packages/org.mgds.unity.core --output artifacts/unity/core.xml && uv run python scripts/run-unity-package-tests.py --package Packages/org.mgds.unity.editor --output artifacts/unity/editor.xml && uv run python scripts/run-unity-package-tests.py --package Packages/org.mgds.unity.player --output artifacts/unity/player.xml && uv run python scripts/run-unity-package-tests.py --package Packages/org.mgds.unity.semantic --output artifacts/unity/semantic.xml && uv run python scripts/run-unity-package-tests.py --package Packages/org.mgds.unity.multiplayer --output artifacts/unity/multiplayer.xml && uv run python scripts/run-golden-arena-tests.py",
     "license:check": "uvx --with=reuse[charset-normalizer] reuse lint",
     "check": "pnpm validate:smoke && pnpm schemas:check && pnpm generated:check && pnpm license:check && pnpm test"

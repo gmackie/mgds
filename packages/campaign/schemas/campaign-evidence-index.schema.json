@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mgds.dev/schemas/v0/campaign-evidence-index.schema.json",
+  "title": "MGDS campaign evidence index",
+  "type": "object",
+  "required": [
+    "schema",
+    "bundles"
+  ],
+  "properties": {
+    "schema": {
+      "const": "mgds.campaign-evidence-index/v1"
+    },
+    "bundles": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "evidenceHash",
+          "path"
+        ],
+        "properties": {
+          "evidenceHash": {
+            "type": "string",
+            "pattern": "^sha256:[a-f0-9]{64}$"
+          },
+          "path": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024,
+            "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*\\\\).+$"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}
