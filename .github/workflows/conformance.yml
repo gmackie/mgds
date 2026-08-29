@@ -16,8 +16,13 @@ jobs:
         with: { version: 11.10.0 }
       - uses: actions/setup-node@v5
         with: { node-version-file: .node-version, cache: pnpm }
+      - uses: actions/setup-python@v6
+        with: { python-version-file: .python-version }
+      - uses: actions/setup-dotnet@v5
+        with: { global-json-file: global.json }
       - uses: astral-sh/setup-uv@v7
         with: { version: "0.9.28" }
       - run: pnpm install --frozen-lockfile
+      - run: uv sync --frozen
       - run: pnpm check
       - run: node scripts/run-t0.mjs --host ${{ matrix.host }} --output artifacts/conformance/${{ matrix.host }}.json

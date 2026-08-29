@@ -78,4 +78,7 @@ test("generated sources retain LF on Windows and conformance installs uv", () =>
   assert.match(readFileSync(".gitattributes", "utf8"), /^\* text=auto eol=lf$/m);
   const conformance = readFileSync(".github/workflows/conformance.yml", "utf8");
   assert.match(conformance, /astral-sh\/setup-uv@v7/);
+  assert.match(conformance, /actions\/setup-python@v6/);
+  assert.match(conformance, /actions\/setup-dotnet@v5/);
+  assert.match(conformance, /uv sync --frozen/);
 });
