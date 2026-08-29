@@ -13,8 +13,9 @@
   "scripts": {
     "test": "node --test tests/**/*.test.mjs",
     "validate:smoke": "node scripts/validate-smoke.mjs",
-    "license:check": "uvx --with 'reuse[charset-normalizer]' reuse lint",
-    "check": "pnpm validate:smoke && pnpm license:check && pnpm test"
+    "schemas:check": "node scripts/validate-schemas.mjs",
+    "license:check": "uvx --with=reuse[charset-normalizer] reuse lint",
+    "check": "pnpm validate:smoke && pnpm schemas:check && pnpm license:check && pnpm test"
   },
   "devDependencies": {
     "ajv": "8.17.1"

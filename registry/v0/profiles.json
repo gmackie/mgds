@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "profiles": [
+    {
+      "id": "mgds.conformance.t0@0.1.0",
+      "status": "required",
+      "clauses": ["MGDS-T0-001", "MGDS-T0-002", "MGDS-T0-003", "MGDS-T0-004"],
+      "capabilities": ["mgds.unity.editor.health.get@0.1.0", "mgds.unity.project.assets.list@0.1.0", "mgds.unity.editor.play.start@0.1.0"]
+    },
+    {
+      "id": "mgds.conformance.semantic@0.1.0",
+      "status": "optional",
+      "clauses": ["MGDS-T0-003"],
+      "capabilities": ["mgds.unity.semantic.world.snapshot@0.1.0"]
+    },
+    {
+      "id": "mgds.conformance.player@0.1.0",
+      "status": "optional",
+      "clauses": ["MGDS-T0-004"],
+      "capabilities": ["mgds.unity.player.input.submit@0.1.0"]
+    }
+  ]
+}

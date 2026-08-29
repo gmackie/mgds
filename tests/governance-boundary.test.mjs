@@ -17,7 +17,7 @@ test('repository declares separate code and documentation licenses', async () =>
   assert.match(docs, /Creative Commons Attribution 4.0 International/);
   assert.match(reuse, /SPDX-License-Identifier/);
   assert.equal(pkg.license, 'Apache-2.0');
-  assert.match(pkg.scripts['license:check'], /reuse.*lint/);
+  assert.equal(pkg.scripts['license:check'], 'uvx --with=reuse[charset-normalizer] reuse lint');
   assert.match(ci, /pnpm license:check/);
 });
 

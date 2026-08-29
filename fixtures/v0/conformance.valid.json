@@ -1,0 +1,13 @@
+{
+  "id": "conformance_01K3YXHJ6Q4M8D2N7ZPC",
+  "profile": "mgds.conformance.t0@0.1.0",
+  "subject": {
+    "adapterId": "org.mgds.unity.reference",
+    "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "clauses": [
+    { "id": "MGDS-T0-001", "status": "pass", "evidenceHash": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb" }
+  ],
+  "summary": { "passed": 1, "failed": 0, "notRun": 0 },
+  "createdAt": "2026-08-29T20:00:00Z"
+}

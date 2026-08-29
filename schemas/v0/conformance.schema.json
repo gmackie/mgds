@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mgds.dev/schemas/v0/conformance.schema.json",
+  "title": "MGDS conformance report",
+  "type": "object",
+  "required": ["id", "profile", "subject", "clauses", "summary", "createdAt"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^conformance_[A-Za-z0-9_-]{16,}$" },
+    "profile": { "type": "string", "pattern": "^mgds\\.conformance\\.[a-z0-9.-]+@[0-9]+\\.[0-9]+\\.[0-9]+$" },
+    "subject": {
+      "type": "object",
+      "required": ["adapterId", "digest"],
+      "properties": {
+        "adapterId": { "type": "string", "pattern": "^[a-z][a-z0-9.-]+$" },
+        "digest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" }
+      },
+      "additionalProperties": false
+    },
+    "clauses": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "status", "evidenceHash"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^MGDS-T0-[0-9]{3}$" },
+          "status": { "type": "string", "enum": ["pass", "fail", "not-run"] },
+          "evidenceHash": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+          "reason": { "type": "string", "maxLength": 240 }
+        },
+        "additionalProperties": false
+      }
+    },
+    "summary": {
+      "type": "object",
+      "required": ["passed", "failed", "notRun"],
+      "properties": {
+        "passed": { "type": "integer", "minimum": 0 },
+        "failed": { "type": "integer", "minimum": 0 },
+        "notRun": { "type": "integer", "minimum": 0 }
+      },
+      "additionalProperties": false
+    },
+    "createdAt": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T" }
+  },
+  "additionalProperties": false
+}

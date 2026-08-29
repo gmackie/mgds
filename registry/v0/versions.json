@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "capabilities": [
+    {
+      "id": "mgds.unity.editor.health.get",
+      "versions": [
+        { "version": "0.1.0", "status": "current" },
+        { "version": "0.1.2", "status": "current" }
+      ]
+    },
+    {
+      "id": "mgds.unity.legacy.console.read",
+      "versions": [{ "version": "0.1.0", "status": "deprecated", "replacement": "mgds.unity.editor.logs.list@0.1.0" }]
+    }
+  ]
+}

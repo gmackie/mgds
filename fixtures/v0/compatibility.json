@@ -1,0 +1,8 @@
+{
+  "cases": [
+    { "name": "same version", "requested": "mgds.unity.editor.health.get@0.1.0", "advertised": "mgds.unity.editor.health.get@0.1.0", "expected": "exact" },
+    { "name": "new patch on same zero-major minor line", "requested": "mgds.unity.editor.health.get@0.1.0", "advertised": "mgds.unity.editor.health.get@0.1.2", "expected": "compatible" },
+    { "name": "registered deprecation", "requested": "mgds.unity.legacy.console.read@0.1.0", "advertised": "mgds.unity.legacy.console.read@0.1.0", "expected": "deprecated" },
+    { "name": "different zero-major minor line", "requested": "mgds.unity.editor.health.get@0.1.0", "advertised": "mgds.unity.editor.health.get@0.2.0", "expected": "unsupported" }
+  ]
+}
