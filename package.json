@@ -16,8 +16,10 @@
     "schemas:check": "node scripts/validate-schemas.mjs",
     "generate": "node tools/codegen/generate.mjs",
     "generated:check": "node tools/codegen/generate.mjs --check",
+    "conformance:t0": "node scripts/run-t0.mjs --host local --output artifacts/conformance/local.json",
+    "unity:test": "uv run python scripts/run-unity-package-tests.py --package Packages/org.mgds.unity.core --output artifacts/unity/core.xml && uv run python scripts/run-unity-package-tests.py --package Packages/org.mgds.unity.editor --output artifacts/unity/editor.xml && uv run python scripts/run-unity-package-tests.py --package Packages/org.mgds.unity.player --output artifacts/unity/player.xml && uv run python scripts/run-unity-package-tests.py --package Packages/org.mgds.unity.semantic --output artifacts/unity/semantic.xml && uv run python scripts/run-unity-package-tests.py --package Packages/org.mgds.unity.multiplayer --output artifacts/unity/multiplayer.xml && uv run python scripts/run-golden-arena-tests.py",
     "license:check": "uvx --with=reuse[charset-normalizer] reuse lint",
-    "check": "pnpm validate:smoke && pnpm schemas:check && pnpm license:check && pnpm test"
+    "check": "pnpm validate:smoke && pnpm schemas:check && pnpm generated:check && pnpm license:check && pnpm test"
   },
   "devDependencies": {
     "ajv": "8.17.1"

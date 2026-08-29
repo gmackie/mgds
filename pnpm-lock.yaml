@@ -18,13 +18,27 @@ importers:
 
   packages/artifacts: {}
 
+  packages/attestation: {}
+
+  packages/broker: {}
+
   packages/controller: {}
+
+  packages/evaluator: {}
+
+  packages/fault-injector: {}
 
   packages/mcp-projection: {}
 
   packages/policy: {}
 
   packages/protocol-ts: {}
+
+  packages/redaction: {}
+
+  packages/report: {}
+
+  packages/sandbox: {}
 
 packages:
 

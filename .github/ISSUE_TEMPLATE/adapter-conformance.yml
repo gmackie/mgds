@@ -1,0 +1,24 @@
+name: Adapter conformance submission
+description: Submit a reproducible public MGDS adapter evidence bundle.
+title: "[Adapter conformance] "
+labels: [conformance]
+body:
+  - type: input
+    id: adapter
+    attributes: { label: Adapter and version }
+    validations: { required: true }
+  - type: input
+    id: revision
+    attributes: { label: Immutable source revision }
+    validations: { required: true }
+  - type: input
+    id: bundle
+    attributes: { label: Public evidence bundle URL }
+    validations: { required: true }
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Privacy confirmation
+      options:
+        - label: The bundle contains no credentials, personal identities, transcripts, or raw local paths.
+          required: true
