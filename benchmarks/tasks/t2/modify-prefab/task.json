@@ -1,0 +1,1 @@
+{"id":"mgds.benchmark.modify-prefab@0.1.0","family":"modification","tier":"T2","outcome":{"componentConfigured":true},"visibleAssertions":["prefab.loads"],"hiddenAssertions":["runtime.behavior"]}

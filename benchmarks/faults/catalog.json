@@ -1,0 +1,1 @@
+{"version":"0.1.0","faults":["compile-failure","crash","disconnect","insufficient-authority","missing-reference","moved-asset","package-failure","port-collision","scene-divergence","stale-import","timeout"],"requireKnownWorkspaceState":true}

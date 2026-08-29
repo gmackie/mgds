@@ -1,0 +1,1 @@
+{"id":"mgds.profile.performance@0.1.0","metrics":["frameTimeMs","cpuMainMs","gpuMs","allocBytes"],"requires":["hardware","build","quality","resolution"],"reportBaselineRelative":true}

@@ -1,0 +1,1 @@
+{"id":"mgds.benchmark.inspect-scene@0.1.0","family":"inspection","tier":"T1","outcome":{"boundedHierarchy":true},"visibleAssertions":["scene.opens"],"hiddenAssertions":["hierarchy.hash"]}

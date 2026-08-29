@@ -1,0 +1,1 @@
+{"id":"mgds.benchmark.add-feature@0.1.0","family":"feature","tier":"T2","outcome":{"playerCanDash":true},"visibleAssertions":["compile.clean"],"hiddenAssertions":["semantic.dash","input.dash"]}

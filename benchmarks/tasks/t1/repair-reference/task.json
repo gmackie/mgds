@@ -1,0 +1,1 @@
+{"id":"mgds.benchmark.repair-reference@0.1.0","family":"repair","tier":"T1","outcome":{"missingReferences":0},"visibleAssertions":["compile.clean"],"hiddenAssertions":["scene.references.valid"]}

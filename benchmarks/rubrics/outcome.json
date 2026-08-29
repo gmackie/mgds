@@ -1,0 +1,1 @@
+{"id":"mgds.rubric.outcome@0.1.0","implementationAgnostic":true,"dimensions":["functional","robustness","performance","human-acceptance"],"policyFailureInvalidates":true}

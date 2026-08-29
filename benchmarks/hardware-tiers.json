@@ -1,0 +1,1 @@
+{"tiers":[{"id":"dev-macos-arm64","required":["cpuModel","memoryBytes","gpuModel","osBuild"]},{"id":"ci-linux-x64","required":["cpuModel","memoryBytes","gpuMode","kernel"]},{"id":"ci-windows-x64","required":["cpuModel","memoryBytes","gpuMode","osBuild"]}]}
