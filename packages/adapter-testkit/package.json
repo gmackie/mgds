@@ -1,0 +1,7 @@
+{
+  "name": "@mgds/adapter-testkit",
+  "version": "0.1.0-preview.1",
+  "type": "module",
+  "license": "Apache-2.0",
+  "exports": "./src/fake-adapter.mjs"
+}

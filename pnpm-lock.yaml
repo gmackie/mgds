@@ -12,7 +12,17 @@ importers:
         specifier: 8.17.1
         version: 8.17.1
 
+  apps/mgds-cli: {}
+
+  packages/adapter-testkit: {}
+
+  packages/artifacts: {}
+
   packages/controller: {}
+
+  packages/mcp-projection: {}
+
+  packages/policy: {}
 
   packages/protocol-ts: {}
 
