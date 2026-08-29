@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "errors": [
+    { "code": "MGDS_INVALID_REQUEST", "retry": "never" },
+    { "code": "MGDS_UNSUPPORTED_CAPABILITY", "retry": "never" },
+    { "code": "MGDS_POLICY_DENIED", "retry": "never" },
+    { "code": "MGDS_APPROVAL_REQUIRED", "retry": "same-request" },
+    { "code": "MGDS_STALE_LEASE", "retry": "new-lease" },
+    { "code": "MGDS_ADAPTER_UNAVAILABLE", "retry": "after-recovery" },
+    { "code": "MGDS_BUDGET_EXHAUSTED", "retry": "never" },
+    { "code": "MGDS_TIMEOUT", "retry": "after-recovery" },
+    { "code": "MGDS_EVIDENCE_INVALID", "retry": "never" }
+  ]
+}

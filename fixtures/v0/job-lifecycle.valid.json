@@ -1,0 +1,27 @@
+{
+  "procedure": {
+    "id": "proc_01K3YXBR30T5K6A4H9CX",
+    "capabilityId": "mgds.unity.editor.play.start@0.1.0",
+    "idempotency": "key-required",
+    "idempotencyKey": "idem_01K3YXBX3X6XQREZ5V9M",
+    "inputs": {},
+    "timeoutSeconds": 60
+  },
+  "job": {
+    "id": "job_01K3YXC5ZP3QAYB0A6DE",
+    "procedureId": "proc_01K3YXBR30T5K6A4H9CX",
+    "projectScope": "prj_01K3YXA0J3V6J2HM8Q4W",
+    "state": "running",
+    "attempt": 1,
+    "createdAt": "2026-08-29T20:00:00Z",
+    "updatedAt": "2026-08-29T20:00:01Z"
+  },
+  "event": {
+    "jobId": "job_01K3YXC5ZP3QAYB0A6DE",
+    "sequence": 2,
+    "type": "transition",
+    "at": "2026-08-29T20:00:01Z",
+    "from": "granted",
+    "to": "running"
+  }
+}

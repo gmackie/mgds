@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mgds.dev/schemas/v0/event.schema.json",
+  "title": "MGDS job event",
+  "type": "object",
+  "required": ["jobId", "sequence", "type", "at"],
+  "properties": {
+    "jobId": { "type": "string", "pattern": "^job_[A-Za-z0-9_-]{16,}$" },
+    "sequence": { "type": "integer", "minimum": 1 },
+    "type": { "type": "string", "enum": ["transition", "execution-started", "checkpoint", "artifact", "diagnostic"] },
+    "at": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T" },
+    "from": { "type": "string", "enum": ["queued", "granted", "running", "checkpointed", "cancelling", "succeeded", "failed", "cancelled", "timed-out", "expired"] },
+    "to": { "type": "string", "enum": ["queued", "granted", "running", "checkpointed", "cancelling", "succeeded", "failed", "cancelled", "timed-out", "expired"] },
+    "attempt": { "type": "integer", "minimum": 1 },
+    "payload": { "type": "object" }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "type": { "const": "transition" } }, "required": ["type"] },
+      "then": { "properties": { "from": true, "to": true }, "required": ["from", "to"] }
+    },
+    {
+      "if": { "properties": { "type": { "const": "execution-started" } }, "required": ["type"] },
+      "then": { "properties": { "attempt": true }, "required": ["attempt"] }
+    }
+  ],
+  "additionalProperties": false
+}

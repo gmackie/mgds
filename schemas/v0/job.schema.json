@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mgds.dev/schemas/v0/job.schema.json",
+  "title": "MGDS asynchronous job",
+  "type": "object",
+  "required": ["id", "procedureId", "projectScope", "state", "attempt", "createdAt", "updatedAt"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^job_[A-Za-z0-9_-]{16,}$" },
+    "procedureId": { "type": "string", "pattern": "^proc_[A-Za-z0-9_-]{16,}$" },
+    "projectScope": { "type": "string", "pattern": "^prj_[A-Za-z0-9_-]{16,}$" },
+    "state": { "type": "string", "enum": ["queued", "granted", "running", "checkpointed", "cancelling", "succeeded", "failed", "cancelled", "timed-out", "expired"] },
+    "attempt": { "type": "integer", "minimum": 0 },
+    "createdAt": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T" },
+    "updatedAt": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T" },
+    "terminalError": { "type": "string", "pattern": "^MGDS_[A-Z0-9_]+$" },
+    "resultHash": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" }
+  },
+  "additionalProperties": false
+}
