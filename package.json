@@ -2,6 +2,7 @@
   "name": "@mgds/workspace",
   "version": "0.0.0",
   "private": true,
+  "license": "Apache-2.0",
   "description": "Model Game Development Standard reference workspace",
   "type": "module",
   "packageManager": "pnpm@11.10.0",
@@ -12,7 +13,8 @@
   "scripts": {
     "test": "node --test tests/**/*.test.mjs",
     "validate:smoke": "node scripts/validate-smoke.mjs",
-    "check": "pnpm validate:smoke && pnpm test"
+    "license:check": "uvx --with 'reuse[charset-normalizer]' reuse lint",
+    "check": "pnpm validate:smoke && pnpm license:check && pnpm test"
   },
   "devDependencies": {
     "ajv": "8.17.1"

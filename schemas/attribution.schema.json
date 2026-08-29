@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mgds.dev/schemas/attribution.schema.json",
+  "type": "object",
+  "required": ["version", "assets"],
+  "properties": {
+    "version": { "const": 1 },
+    "assets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["path", "sha256", "source", "license", "redistributionAllowed"],
+        "properties": {
+          "path": { "type": "string", "minLength": 1 },
+          "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+          "source": { "type": "string", "minLength": 1 },
+          "license": { "type": "string", "minLength": 1 },
+          "redistributionAllowed": { "const": true }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

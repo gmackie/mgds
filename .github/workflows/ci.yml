@@ -42,5 +42,7 @@ jobs:
         run: uv sync --frozen
       - name: Validate schema smoke contract
         run: pnpm validate:smoke
+      - name: Validate licensing and provenance metadata
+        run: pnpm license:check
       - name: Run foundation tests
         run: pnpm test
