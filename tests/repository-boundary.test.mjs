@@ -12,6 +12,7 @@ const requiredFiles = [
   "pyproject.toml",
   "uv.lock",
   "global.json",
+  ".gitattributes",
   ".github/workflows/ci.yml",
   "schemas/smoke.schema.json",
   "fixtures/smoke.valid.json",
@@ -71,4 +72,10 @@ test("runtime artifact ignores do not hide the source artifact package", () => {
 test("Unity UPM packages are not treated as npm workspaces", () => {
   const workspace = readFileSync("pnpm-workspace.yaml", "utf8");
   assert.doesNotMatch(workspace, /Packages\/\*/);
+});
+
+test("generated sources retain LF on Windows and conformance installs uv", () => {
+  assert.match(readFileSync(".gitattributes", "utf8"), /^\* text=auto eol=lf$/m);
+  const conformance = readFileSync(".github/workflows/conformance.yml", "utf8");
+  assert.match(conformance, /astral-sh\/setup-uv@v7/);
 });
