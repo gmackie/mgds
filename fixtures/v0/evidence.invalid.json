@@ -1,0 +1,19 @@
+{
+  "schemaCases": [
+    {
+      "name": "artifact without content hash",
+      "schema": "artifact",
+      "value": { "id": "artifact_01K3YXG89W3E6CFM0ZRT", "logicalName": "events.jsonl", "mediaType": "application/jsonl", "bytes": 10 }
+    },
+    {
+      "name": "agent cannot author evaluator verdict",
+      "schema": "result",
+      "value": { "runId": "run_01K3YXG1B2N8TQ5A6VPM", "verdict": "valid", "evaluator": { "id": "mgds.evaluator.key-exit@0.1.0", "digest": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff", "authority": "agent" }, "scores": {}, "evidenceHash": "sha256:5555555555555555555555555555555555555555555555555555555555555555" }
+    },
+    {
+      "name": "run must pin adapter digest",
+      "schema": "run",
+      "value": { "id": "run_01K3YXG1B2N8TQ5A6VPM", "taskId": "mgds.task.golden-arena.key-exit@0.1.0", "taskHash": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc", "controllerDigest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd", "evaluatorDigest": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff", "policyHash": "sha256:1111111111111111111111111111111111111111111111111111111111111111", "unityVersion": "6000.3.9f1", "agent": { "harness": "mgds", "model": "declared", "budgetHash": "sha256:2222222222222222222222222222222222222222222222222222222222222222" }, "seed": 1, "startedAt": "2026-08-29T20:00:00Z" }
+    }
+  ]
+}

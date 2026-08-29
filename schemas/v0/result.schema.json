@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mgds.dev/schemas/v0/result.schema.json",
+  "title": "MGDS evaluation result",
+  "type": "object",
+  "required": ["runId", "verdict", "evaluator", "scores", "evidenceHash"],
+  "properties": {
+    "runId": { "type": "string", "pattern": "^run_[A-Za-z0-9_-]{16,}$" },
+    "verdict": { "type": "string", "enum": ["valid", "invalid", "inconclusive"] },
+    "evaluator": {
+      "type": "object",
+      "required": ["id", "digest", "authority"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^mgds\\.evaluator\\.[a-z0-9.-]+@[0-9]+\\.[0-9]+\\.[0-9]+$" },
+        "digest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+        "authority": { "const": "independent-evaluator" }
+      },
+      "additionalProperties": false
+    },
+    "scores": { "type": "object", "additionalProperties": { "type": "number", "minimum": 0, "maximum": 1 } },
+    "evidenceHash": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+    "limitations": { "type": "array", "items": { "type": "string", "maxLength": 240 } }
+  },
+  "additionalProperties": false
+}

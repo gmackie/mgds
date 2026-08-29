@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mgds.dev/schemas/v0/artifact.schema.json",
+  "title": "MGDS content-addressed artifact",
+  "type": "object",
+  "required": ["id", "logicalName", "mediaType", "sha256", "bytes"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^artifact_[A-Za-z0-9_-]{16,}$" },
+    "logicalName": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{0,119}$" },
+    "mediaType": { "type": "string", "pattern": "^[a-z0-9.+-]+/[a-z0-9.+-]+$" },
+    "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "bytes": { "type": "integer", "minimum": 0, "maximum": 10737418240 },
+    "truncated": { "type": "boolean" }
+  },
+  "additionalProperties": false
+}

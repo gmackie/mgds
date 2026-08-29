@@ -1,0 +1,47 @@
+{
+  "task": {
+    "id": "mgds.task.golden-arena.key-exit@0.1.0",
+    "title": "Collect the key and unlock the exit",
+    "description": "Implement a collectible key, locked exit, and visible key-state HUD.",
+    "requiredCapabilities": ["mgds.unity.project.assets.list@0.1.0", "mgds.unity.editor.play.start@0.1.0"],
+    "fixtureHash": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "inputsHash": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "evaluatorProfile": "mgds.evaluator.key-exit@0.1.0",
+    "seed": 42
+  },
+  "run": {
+    "id": "run_01K3YXG1B2N8TQ5A6VPM",
+    "taskId": "mgds.task.golden-arena.key-exit@0.1.0",
+    "taskHash": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+    "controllerDigest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+    "adapterDigest": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+    "evaluatorDigest": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+    "policyHash": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+    "unityVersion": "6000.3.9f1",
+    "agent": { "harness": "mgds-codex", "model": "declared-model", "budgetHash": "sha256:2222222222222222222222222222222222222222222222222222222222222222" },
+    "seed": 42,
+    "startedAt": "2026-08-29T20:00:00Z"
+  },
+  "artifact": {
+    "id": "artifact_01K3YXG89W3E6CFM0ZRT",
+    "logicalName": "playtest-events.jsonl",
+    "mediaType": "application/jsonl",
+    "sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+    "bytes": 512,
+    "truncated": false
+  },
+  "evidence": {
+    "runId": "run_01K3YXG1B2N8TQ5A6VPM",
+    "artifacts": ["3333333333333333333333333333333333333333333333333333333333333333"],
+    "eventsHash": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+    "redactionVersion": "0.1.0"
+  },
+  "result": {
+    "runId": "run_01K3YXG1B2N8TQ5A6VPM",
+    "verdict": "valid",
+    "evaluator": { "id": "mgds.evaluator.key-exit@0.1.0", "digest": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff", "authority": "independent-evaluator" },
+    "scores": { "correctness": 1, "regression": 1, "policy": 1 },
+    "evidenceHash": "sha256:5555555555555555555555555555555555555555555555555555555555555555",
+    "limitations": []
+  }
+}
