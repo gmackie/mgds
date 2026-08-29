@@ -1,0 +1,9 @@
+[project]
+name = "mgds-protocol"
+version = "0.0.0"
+description = "Python bindings and benchmark support for MGDS"
+requires-python = ">=3.12"
+dependencies = []
+
+[tool.uv]
+package = false

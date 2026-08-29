@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  foundation:
+    name: Foundation (${{ matrix.runner }})
+    strategy:
+      fail-fast: false
+      matrix:
+        runner: [macos-14, ubuntu-22.04, windows-2025]
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .node-version
+          cache: pnpm
+      - uses: actions/setup-python@v6
+        with:
+          python-version-file: .python-version
+      - uses: actions/setup-dotnet@v5
+        with:
+          global-json-file: global.json
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.9.4"
+          enable-cache: true
+      - name: Enable pinned pnpm
+        run: corepack enable
+      - name: Install Node dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Sync Python environment
+        run: uv sync --frozen
+      - name: Validate schema smoke contract
+        run: pnpm validate:smoke
+      - name: Run foundation tests
+        run: pnpm test

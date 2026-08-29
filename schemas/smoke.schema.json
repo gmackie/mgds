@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mgds.dev/schemas/smoke.schema.json",
+  "title": "MGDS schema toolchain smoke fixture",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["kind", "schemaVersion"],
+  "properties": {
+    "kind": { "const": "mgds-smoke" },
+    "schemaVersion": { "type": "string", "pattern": "^0\\.[0-9]+\\.[0-9]+$" }
+  }
+}

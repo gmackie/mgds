@@ -1,0 +1,16 @@
+.DS_Store
+.env
+.env.*
+!.env.example
+.pnpm-store/
+node_modules/
+.venv/
+.tools/
+artifacts/
+.mgds/artifacts/
+coverage/
+dist/
+Library/
+Logs/
+Temp/
+UserSettings/

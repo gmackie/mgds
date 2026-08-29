@@ -1,0 +1,20 @@
+{
+  "name": "@mgds/workspace",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Model Game Development Standard reference workspace",
+  "type": "module",
+  "packageManager": "pnpm@11.10.0",
+  "engines": {
+    "node": ">=24.20.0 <25",
+    "pnpm": "11.10.0"
+  },
+  "scripts": {
+    "test": "node --test tests/**/*.test.mjs",
+    "validate:smoke": "node scripts/validate-smoke.mjs",
+    "check": "pnpm validate:smoke && pnpm test"
+  },
+  "devDependencies": {
+    "ajv": "8.17.1"
+  }
+}
