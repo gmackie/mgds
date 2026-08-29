@@ -40,6 +40,14 @@ test("CI runs the smoke contract on the three required hosts", () => {
   assert.match(workflow, /pnpm validate:smoke/);
 });
 
+test("CI installs pnpm before setup-node initializes the pnpm cache", () => {
+  const workflow = readFileSync(".github/workflows/ci.yml", "utf8");
+  const pnpmSetup = workflow.indexOf("pnpm/action-setup@v4");
+  const nodeSetup = workflow.indexOf("actions/setup-node@v5");
+  assert.ok(pnpmSetup >= 0, "pnpm setup action is missing");
+  assert.ok(pnpmSetup < nodeSetup, "pnpm must exist before setup-node resolves the pnpm cache");
+});
+
 test("schema smoke accepts the valid fixture and rejects the invalid fixture", () => {
   const run = spawnSync(process.execPath, ["scripts/validate-smoke.mjs"], {
     encoding: "utf8",
