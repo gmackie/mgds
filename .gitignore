@@ -9,8 +9,8 @@ node_modules/
 __pycache__/
 *.py[cod]
 .tools/
-artifacts/
-.mgds/artifacts/
+/artifacts/
+/.mgds/artifacts/
 coverage/
 dist/
 Library/

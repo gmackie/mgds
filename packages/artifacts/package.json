@@ -1,0 +1,11 @@
+{
+  "name": "@mgds/artifacts",
+  "version": "0.1.0-preview.1",
+  "type": "module",
+  "license": "Apache-2.0",
+  "exports": {
+    "./store": "./src/artifact-store.mjs",
+    "./ledger": "./src/event-ledger.mjs"
+  },
+  "scripts": { "test": "node --test test/**/*.test.mjs" }
+}

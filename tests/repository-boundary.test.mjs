@@ -57,3 +57,10 @@ test("schema smoke accepts the valid fixture and rejects the invalid fixture", (
   assert.match(run.stdout, /valid fixture: accepted/);
   assert.match(run.stdout, /invalid fixture: rejected/);
 });
+
+test("runtime artifact ignores do not hide the source artifact package", () => {
+  const ignore = readFileSync(".gitignore", "utf8");
+  assert.doesNotMatch(ignore, /^artifacts\/$/m);
+  assert.match(ignore, /^\/artifacts\/$/m);
+  assert.equal(existsSync("packages/artifacts/src/artifact-store.mjs"), true);
+});
