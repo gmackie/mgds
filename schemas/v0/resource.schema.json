@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mgds.dev/schemas/v0/resource.schema.json",
+  "title": "MGDS resource reference",
+  "type": "object",
+  "required": ["id", "projectScope", "generation", "kind"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^res_[A-Za-z0-9_-]{16,}$" },
+    "projectScope": { "type": "string", "pattern": "^prj_[A-Za-z0-9_-]{16,}$" },
+    "generation": { "type": "integer", "minimum": 0 },
+    "kind": {
+      "type": "string",
+      "enum": ["project", "asset", "scene", "entity", "component", "player", "artifact", "job"]
+    },
+    "displayLabel": { "type": "string", "minLength": 1, "maxLength": 120 },
+    "contentHash": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" }
+  },
+  "additionalProperties": false
+}

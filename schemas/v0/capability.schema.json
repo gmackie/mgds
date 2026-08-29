@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mgds.dev/schemas/v0/capability.schema.json",
+  "title": "MGDS capability",
+  "type": "object",
+  "required": ["id", "summary", "inputSchema", "outputSchema", "preconditions", "effects", "risk", "authority", "units", "idempotency"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^mgds\\.unity\\.[a-z0-9.-]+@[0-9]+\\.[0-9]+\\.[0-9]+$" },
+    "summary": { "type": "string", "minLength": 1, "maxLength": 240 },
+    "inputSchema": { "type": "object" },
+    "outputSchema": { "type": "object" },
+    "preconditions": {
+      "type": "array",
+      "items": { "type": "string", "enum": ["editor-ready", "compiled", "play-mode", "development-player", "build-support", "network-lease"] },
+      "uniqueItems": true
+    },
+    "effects": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "enum": ["read", "project-write", "scene-write", "play-state", "build", "network", "process"] },
+      "uniqueItems": true
+    },
+    "risk": { "type": "string", "enum": ["read", "bounded-write", "elevated", "irreversible"] },
+    "authority": {
+      "type": "object",
+      "required": ["scope", "mutates", "reversible", "approval"],
+      "properties": {
+        "scope": { "type": "string", "enum": ["project", "workspace", "host", "network"] },
+        "mutates": { "type": "boolean" },
+        "reversible": { "type": "boolean" },
+        "approval": { "type": "string", "enum": ["none", "policy", "exact"] }
+      },
+      "additionalProperties": false
+    },
+    "units": {
+      "type": "object",
+      "required": ["time", "distance", "angle", "frame"],
+      "properties": {
+        "time": { "const": "second" },
+        "distance": { "const": "meter" },
+        "angle": { "const": "degree" },
+        "frame": { "type": "string", "enum": ["unity-world-left-handed-y-up", "screen-pixels-top-left", "not-applicable"] }
+      },
+      "additionalProperties": false
+    },
+    "idempotency": { "type": "string", "enum": ["safe", "key-required", "never"] },
+    "deprecated": { "type": "boolean", "default": false }
+  },
+  "additionalProperties": false
+}

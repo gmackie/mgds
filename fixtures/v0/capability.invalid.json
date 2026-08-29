@@ -1,0 +1,20 @@
+{
+  "cases": [
+    {
+      "name": "missing units",
+      "value": { "id": "mgds.unity.editor.health.get@0.1.0", "summary": "Health", "inputSchema": {}, "outputSchema": {}, "preconditions": [], "effects": ["read"], "risk": "read", "authority": { "scope": "project", "mutates": false, "reversible": true, "approval": "none" }, "idempotency": "safe" }
+    },
+    {
+      "name": "missing effects",
+      "value": { "id": "mgds.unity.editor.health.get@0.1.0", "summary": "Health", "inputSchema": {}, "outputSchema": {}, "preconditions": [], "risk": "read", "authority": { "scope": "project", "mutates": false, "reversible": true, "approval": "none" }, "units": { "time": "second", "distance": "meter", "angle": "degree", "frame": "not-applicable" }, "idempotency": "safe" }
+    },
+    {
+      "name": "risk cannot be omitted",
+      "value": { "id": "mgds.unity.editor.health.get@0.1.0", "summary": "Health", "inputSchema": {}, "outputSchema": {}, "preconditions": [], "effects": ["read"], "authority": { "scope": "project", "mutates": false, "reversible": true, "approval": "none" }, "units": { "time": "second", "distance": "meter", "angle": "degree", "frame": "not-applicable" }, "idempotency": "safe" }
+    },
+    {
+      "name": "authority cannot be omitted",
+      "value": { "id": "mgds.unity.editor.health.get@0.1.0", "summary": "Health", "inputSchema": {}, "outputSchema": {}, "preconditions": [], "effects": ["read"], "risk": "read", "units": { "time": "second", "distance": "meter", "angle": "degree", "frame": "not-applicable" }, "idempotency": "safe" }
+    }
+  ]
+}

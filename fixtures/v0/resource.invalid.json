@@ -1,0 +1,16 @@
+{
+  "cases": [
+    {
+      "name": "raw path is not an opaque resource id",
+      "value": { "id": "/private/project/Assets/Main.unity", "projectScope": "prj_01K3YXA0J3V6J2HM8Q4W", "generation": 0, "kind": "scene" }
+    },
+    {
+      "name": "project scope is mandatory",
+      "value": { "id": "res_01K3YXA01E4MNT99QAZ7", "generation": 0, "kind": "asset" }
+    },
+    {
+      "name": "generation cannot move below zero",
+      "value": { "id": "res_01K3YXA01E4MNT99QAZ7", "projectScope": "prj_01K3YXA0J3V6J2HM8Q4W", "generation": -1, "kind": "scene" }
+    }
+  ]
+}

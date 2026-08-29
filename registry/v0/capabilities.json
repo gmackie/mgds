@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "capabilities": [
+    { "id": "mgds.unity.editor.health.get@0.1.0", "profile": "core" },
+    { "id": "mgds.unity.project.assets.list@0.1.0", "profile": "core" },
+    { "id": "mgds.unity.editor.play.start@0.1.0", "profile": "core" },
+    { "id": "mgds.unity.semantic.world.snapshot@0.1.0", "profile": "semantic" },
+    { "id": "mgds.unity.player.input.submit@0.1.0", "profile": "player" }
+  ]
+}

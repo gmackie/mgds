@@ -1,0 +1,45 @@
+{
+  "resource": {
+    "id": "res_01K3YXA01E4MNT99QAZ7",
+    "projectScope": "prj_01K3YXA0J3V6J2HM8Q4W",
+    "generation": 4,
+    "kind": "scene",
+    "displayLabel": "Golden Arena",
+    "contentHash": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "capability": {
+    "id": "mgds.unity.editor.play.start@0.1.0",
+    "summary": "Enter play mode after compilation is complete.",
+    "inputSchema": { "type": "object", "additionalProperties": false },
+    "outputSchema": { "type": "object" },
+    "preconditions": ["editor-ready", "compiled"],
+    "effects": ["play-state"],
+    "risk": "bounded-write",
+    "authority": { "scope": "project", "mutates": true, "reversible": true, "approval": "policy" },
+    "units": { "time": "second", "distance": "meter", "angle": "degree", "frame": "not-applicable" },
+    "idempotency": "safe"
+  },
+  "manifest": {
+    "schemaVersion": "0.1.0",
+    "adapter": {
+      "id": "org.mgds.unity.reference",
+      "version": "0.1.0-preview.1",
+      "digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+    },
+    "project": { "scope": "prj_01K3YXA0J3V6J2HM8Q4W", "generation": 4 },
+    "capabilities": [
+      {
+        "id": "mgds.unity.editor.play.start@0.1.0",
+        "summary": "Enter play mode after compilation is complete.",
+        "inputSchema": { "type": "object", "additionalProperties": false },
+        "outputSchema": { "type": "object" },
+        "preconditions": ["editor-ready", "compiled"],
+        "effects": ["play-state"],
+        "risk": "bounded-write",
+        "authority": { "scope": "project", "mutates": true, "reversible": true, "approval": "policy" },
+        "units": { "time": "second", "distance": "meter", "angle": "degree", "frame": "not-applicable" },
+        "idempotency": "safe"
+      }
+    ]
+  }
+}
