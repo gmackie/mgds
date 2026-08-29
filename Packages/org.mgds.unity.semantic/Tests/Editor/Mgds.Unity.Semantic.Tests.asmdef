@@ -1,0 +1,8 @@
+{
+  "name": "Mgds.Unity.Semantic.Tests",
+  "rootNamespace": "Mgds.Unity.Semantic.Tests",
+  "references": ["Mgds.Unity.Semantic"],
+  "includePlatforms": ["Editor"],
+  "optionalUnityReferences": ["TestAssemblies"],
+  "autoReferenced": false
+}

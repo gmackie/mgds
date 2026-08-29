@@ -1,0 +1,6 @@
+{
+  "name": "Mgds.Unity.Semantic",
+  "rootNamespace": "Mgds.Unity.Semantic",
+  "references": ["Mgds.Unity.Player"],
+  "autoReferenced": true
+}

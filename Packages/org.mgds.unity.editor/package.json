@@ -1,0 +1,11 @@
+{
+  "name": "org.mgds.unity.editor",
+  "displayName": "MGDS Unity Editor Adapter",
+  "version": "0.1.0-preview.1",
+  "unity": "6000.3",
+  "description": "Bounded editor inspection, mutation, execution, capture, test, profiling, and build capabilities.",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "org.mgds.unity.core": "0.1.0-preview.1"
+  }
+}

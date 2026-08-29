@@ -1,0 +1,6 @@
+{
+  "name": "Mgds.Unity.Player",
+  "rootNamespace": "Mgds.Unity.Player",
+  "references": ["Mgds.Unity.Core.Runtime"],
+  "autoReferenced": true
+}

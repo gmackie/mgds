@@ -1,0 +1,9 @@
+{
+  "name": "org.mgds.unity.player",
+  "displayName": "MGDS Unity Player Probe",
+  "version": "0.1.0-preview.1",
+  "unity": "6000.3",
+  "description": "Authenticated, allowlisted, bounded runtime probe for development players.",
+  "license": "Apache-2.0",
+  "dependencies": { "org.mgds.unity.core": "0.1.0-preview.1" }
+}

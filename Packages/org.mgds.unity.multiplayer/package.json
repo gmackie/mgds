@@ -1,0 +1,9 @@
+{
+  "name": "org.mgds.unity.multiplayer",
+  "displayName": "MGDS Unity Multiplayer Profile",
+  "version": "0.1.0-preview.1",
+  "unity": "6000.3",
+  "description": "Optional bounded multi-process allocation and synchronized session profile.",
+  "license": "Apache-2.0",
+  "dependencies": { "org.mgds.unity.semantic": "0.1.0-preview.1" }
+}

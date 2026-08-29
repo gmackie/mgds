@@ -1,0 +1,7 @@
+{
+  "name": "Mgds.Unity.Editor",
+  "rootNamespace": "Mgds.Unity.Editor",
+  "references": ["Mgds.Unity.Core.Runtime", "Mgds.Unity.Core.Editor", "Unity.Pipeline"],
+  "includePlatforms": ["Editor"],
+  "autoReferenced": true
+}

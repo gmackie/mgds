@@ -1,0 +1,6 @@
+{
+  "name": "Mgds.Unity.Core.Runtime",
+  "rootNamespace": "Mgds.Unity.Core",
+  "references": ["Unity.Pipeline"],
+  "autoReferenced": true
+}

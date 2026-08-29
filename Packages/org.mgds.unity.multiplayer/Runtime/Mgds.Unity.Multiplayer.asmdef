@@ -1,0 +1,6 @@
+{
+  "name": "Mgds.Unity.Multiplayer",
+  "rootNamespace": "Mgds.Unity.Multiplayer",
+  "references": ["Mgds.Unity.Semantic"],
+  "autoReferenced": true
+}

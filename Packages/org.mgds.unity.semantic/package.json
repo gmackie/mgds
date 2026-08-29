@@ -1,0 +1,9 @@
+{
+  "name": "org.mgds.unity.semantic",
+  "displayName": "MGDS Unity Semantic Probe",
+  "version": "0.1.0-preview.1",
+  "unity": "6000.3",
+  "description": "Stable gameplay entities, world state, event taps, and semantic assertions.",
+  "license": "Apache-2.0",
+  "dependencies": { "org.mgds.unity.player": "0.1.0-preview.1" }
+}

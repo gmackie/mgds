@@ -1,0 +1,8 @@
+{
+  "name": "Mgds.Unity.Editor.Tests",
+  "rootNamespace": "Mgds.Unity.Editor.Tests",
+  "references": ["Mgds.Unity.Editor", "Mgds.Unity.Core.Runtime", "Unity.Pipeline"],
+  "includePlatforms": ["Editor"],
+  "optionalUnityReferences": ["TestAssemblies"],
+  "autoReferenced": false
+}

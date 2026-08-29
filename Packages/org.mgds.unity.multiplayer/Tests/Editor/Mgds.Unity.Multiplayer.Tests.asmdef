@@ -1,0 +1,8 @@
+{
+  "name": "Mgds.Unity.Multiplayer.Tests",
+  "rootNamespace": "Mgds.Unity.Multiplayer.Tests",
+  "references": ["Mgds.Unity.Multiplayer"],
+  "includePlatforms": ["Editor"],
+  "optionalUnityReferences": ["TestAssemblies"],
+  "autoReferenced": false
+}

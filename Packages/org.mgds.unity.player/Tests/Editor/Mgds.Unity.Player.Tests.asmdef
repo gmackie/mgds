@@ -1,0 +1,8 @@
+{
+  "name": "Mgds.Unity.Player.Tests",
+  "rootNamespace": "Mgds.Unity.Player.Tests",
+  "references": ["Mgds.Unity.Player"],
+  "includePlatforms": ["Editor"],
+  "optionalUnityReferences": ["TestAssemblies"],
+  "autoReferenced": false
+}

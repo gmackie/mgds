@@ -64,3 +64,8 @@ test("runtime artifact ignores do not hide the source artifact package", () => {
   assert.match(ignore, /^\/artifacts\/$/m);
   assert.equal(existsSync("packages/artifacts/src/artifact-store.mjs"), true);
 });
+
+test("Unity UPM packages are not treated as npm workspaces", () => {
+  const workspace = readFileSync("pnpm-workspace.yaml", "utf8");
+  assert.doesNotMatch(workspace, /Packages\/\*/);
+});
