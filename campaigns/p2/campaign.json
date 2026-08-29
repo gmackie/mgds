@@ -1,0 +1,1 @@
+{"id":"mgds.campaign.p2@0.1.0","status":"configured","seeds":[1337,7331,424242],"harnesses":["codex","claude-code"],"hosts":["macos-arm64","linux-x64","windows-x64"],"repeatRuns":5,"soakMinutes":240,"thresholds":{"seedAgreement":1,"t0PassRate":1,"orphanProcesses":0,"unknownWorkspaceStates":0}}

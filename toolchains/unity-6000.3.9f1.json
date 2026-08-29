@@ -1,0 +1,1 @@
+{"unity":"6000.3.9f1","revision":"7a9955a4f2fa","pipeline":"0.5.0-exp.1","testFramework":"1.6.0","hosts":{"macos-arm64":{"runner":"macos-14","buildTarget":"StandaloneOSX"},"linux-x64":{"runner":"ubuntu-22.04","buildTarget":"StandaloneLinux64"},"windows-x64":{"runner":"windows-2025","buildTarget":"StandaloneWindows64"}}}
