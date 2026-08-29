@@ -5,6 +5,9 @@
 .pnpm-store/
 node_modules/
 .venv/
+.dotnet/
+__pycache__/
+*.py[cod]
 .tools/
 artifacts/
 .mgds/artifacts/
@@ -14,3 +17,5 @@ Library/
 Logs/
 Temp/
 UserSettings/
+csharp-tests/**/bin/
+csharp-tests/**/obj/

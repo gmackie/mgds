@@ -14,6 +14,8 @@
     "test": "node --test tests/**/*.test.mjs",
     "validate:smoke": "node scripts/validate-smoke.mjs",
     "schemas:check": "node scripts/validate-schemas.mjs",
+    "generate": "node tools/codegen/generate.mjs",
+    "generated:check": "node tools/codegen/generate.mjs --check",
     "license:check": "uvx --with=reuse[charset-normalizer] reuse lint",
     "check": "pnpm validate:smoke && pnpm schemas:check && pnpm license:check && pnpm test"
   },

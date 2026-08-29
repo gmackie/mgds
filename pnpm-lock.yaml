@@ -12,6 +12,8 @@ importers:
         specifier: 8.17.1
         version: 8.17.1
 
+  packages/protocol-ts: {}
+
 packages:
 
   ajv@8.17.1:
