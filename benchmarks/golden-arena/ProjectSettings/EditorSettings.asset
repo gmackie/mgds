@@ -1,0 +1,7 @@
+%YAML 1.1
+--- !u!159 &1
+EditorSettings:
+  m_ObjectHideFlags: 0
+  m_SerializationMode: 2
+  m_LineEndingsForNewScripts: 1
+  m_AssetNamingUsesSpace: 0

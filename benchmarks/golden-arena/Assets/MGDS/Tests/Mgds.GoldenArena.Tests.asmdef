@@ -1,0 +1,1 @@
+{"name":"Mgds.GoldenArena.Tests","rootNamespace":"Mgds.GoldenArena.Tests","references":["Mgds.GoldenArena.Runtime"],"includePlatforms":["Editor"],"optionalUnityReferences":["TestAssemblies"],"autoReferenced":false}

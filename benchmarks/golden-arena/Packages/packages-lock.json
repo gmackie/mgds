@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "com.unity.render-pipelines.universal": {"version":"17.3.0","depth":0,"source":"registry"},
+    "com.unity.test-framework": {"version":"1.6.0","depth":0,"source":"builtin"},
+    "org.mgds.unity.editor": {"version":"file:../../../Packages/org.mgds.unity.editor","depth":0,"source":"local"},
+    "org.mgds.unity.semantic": {"version":"file:../../../Packages/org.mgds.unity.semantic","depth":0,"source":"local"}
+  }
+}

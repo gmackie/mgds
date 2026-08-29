@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "com.unity.render-pipelines.universal": "17.3.0",
+    "com.unity.test-framework": "1.6.0",
+    "org.mgds.unity.editor": "file:../../../Packages/org.mgds.unity.editor",
+    "org.mgds.unity.semantic": "file:../../../Packages/org.mgds.unity.semantic"
+  },
+  "testables": ["org.mgds.unity.editor", "org.mgds.unity.semantic"]
+}

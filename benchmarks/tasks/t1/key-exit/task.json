@@ -1,0 +1,10 @@
+{
+  "id": "mgds.golden-arena.key-exit@0.1.0",
+  "instrumentation": "L1",
+  "requires": ["mgds.unity.editor.scenes.inspect@0.1.0", "mgds.unity.semantic.world.snapshot@0.1.0"],
+  "allows": ["repository-patch", "typed-editor-operation", "player-input"],
+  "terminal": {"buildTarget":"desktop","exitUnlocked":true},
+  "evidence": ["compile", "tests", "event-ledger", "screenshot", "player-build"],
+  "budgets": {"wallMinutes":45,"editors":1,"players":1},
+  "seed": 1337
+}
