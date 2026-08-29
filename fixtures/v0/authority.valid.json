@@ -1,0 +1,34 @@
+{
+  "budget": { "wallTimeSeconds": 120, "cpuTimeSeconds": 60, "artifactBytes": 1048576, "networkRequests": 0, "retries": 2 },
+  "policy": {
+    "version": 1,
+    "defaultDecision": "deny",
+    "grants": [
+      {
+        "capabilityId": "mgds.unity.editor.play.start@0.1.0",
+        "projectScope": "prj_01K3YXA0J3V6J2HM8Q4W",
+        "riskCeiling": "bounded-write",
+        "expiresAt": "2026-08-30T00:00:00Z",
+        "budget": { "wallTimeSeconds": 120, "artifactBytes": 1048576, "networkRequests": 0, "retries": 2 }
+      }
+    ]
+  },
+  "approval": {
+    "id": "approval_01K3YXDTVCZQBW3R7M5H",
+    "requestHash": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "projectScope": "prj_01K3YXA0J3V6J2HM8Q4W",
+    "riskCeiling": "bounded-write",
+    "approverRef": "principal_01K3YXE2AQR6K8W4H0JZ",
+    "expiresAt": "2026-08-30T00:00:00Z",
+    "signature": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+  },
+  "lease": {
+    "id": "lease_01K3YXEKDWP9T2C4M6SN",
+    "projectScope": "prj_01K3YXA0J3V6J2HM8Q4W",
+    "holder": "principal_01K3YXE2AQR6K8W4H0JZ",
+    "generation": 1,
+    "capabilityIds": ["mgds.unity.editor.play.start@0.1.0"],
+    "issuedAt": "2026-08-29T20:00:00Z",
+    "expiresAt": "2026-08-29T20:10:00Z"
+  }
+}

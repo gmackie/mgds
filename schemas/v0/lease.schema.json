@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mgds.dev/schemas/v0/lease.schema.json",
+  "title": "MGDS authority lease",
+  "type": "object",
+  "required": ["id", "projectScope", "holder", "generation", "capabilityIds", "issuedAt", "expiresAt"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^lease_[A-Za-z0-9_-]{16,}$" },
+    "projectScope": { "type": "string", "pattern": "^prj_[A-Za-z0-9_-]{16,}$" },
+    "holder": { "type": "string", "pattern": "^principal_[A-Za-z0-9_-]{16,}$" },
+    "generation": { "type": "integer", "minimum": 0 },
+    "capabilityIds": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "pattern": "^mgds\\.unity\\.[a-z0-9.-]+@[0-9]+\\.[0-9]+\\.[0-9]+$" } },
+    "issuedAt": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T" },
+    "expiresAt": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T" }
+  },
+  "additionalProperties": false
+}

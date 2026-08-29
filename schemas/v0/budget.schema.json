@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mgds.dev/schemas/v0/budget.schema.json",
+  "title": "MGDS execution budget",
+  "type": "object",
+  "required": ["wallTimeSeconds", "artifactBytes", "networkRequests", "retries"],
+  "properties": {
+    "wallTimeSeconds": { "type": "integer", "minimum": 0, "maximum": 86400 },
+    "cpuTimeSeconds": { "type": "integer", "minimum": 0, "maximum": 86400 },
+    "artifactBytes": { "type": "integer", "minimum": 0, "maximum": 10737418240 },
+    "networkRequests": { "type": "integer", "minimum": 0, "maximum": 10000 },
+    "retries": { "type": "integer", "minimum": 0, "maximum": 100 }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,8 @@
+{
+  "cases": [
+    { "name": "policy cannot default allow", "schema": "policy", "value": { "version": 1, "defaultDecision": "allow", "grants": [] } },
+    { "name": "approval requires exact request hash", "schema": "approval", "value": { "id": "approval_01K3YXDTVCZQBW3R7M5H", "projectScope": "prj_01K3YXA0J3V6J2HM8Q4W", "riskCeiling": "read", "approverRef": "principal_01K3YXE2AQR6K8W4H0JZ", "expiresAt": "2026-08-30T00:00:00Z", "signature": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb" } },
+    { "name": "lease generation cannot be stale-negative", "schema": "lease", "value": { "id": "lease_01K3YXEKDWP9T2C4M6SN", "projectScope": "prj_01K3YXA0J3V6J2HM8Q4W", "holder": "principal_01K3YXE2AQR6K8W4H0JZ", "generation": -1, "capabilityIds": ["mgds.unity.editor.play.start@0.1.0"], "issuedAt": "2026-08-29T20:00:00Z", "expiresAt": "2026-08-29T20:10:00Z" } },
+    { "name": "budgets cannot grant negative resources", "schema": "budget", "value": { "wallTimeSeconds": -1, "artifactBytes": 0, "networkRequests": 0, "retries": 0 } }
+  ]
+}
