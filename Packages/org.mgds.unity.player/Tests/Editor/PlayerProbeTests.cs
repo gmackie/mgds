@@ -1,4 +1,8 @@
 using System;
+using System.IO;
+using System.Net;
+using System.Net.Sockets;
+using System.Text;
 using NUnit.Framework;
 
 namespace Mgds.Unity.Player.Tests
@@ -25,6 +29,23 @@ namespace Mgds.Unity.Player.Tests
             StringAssert.Contains("_1_", session.Authorize(Secret, "state.read"));
             session.Close();
             Assert.Throws<InvalidOperationException>(() => session.Authorize(Secret, "state.read"));
+        }
+
+        [Test]
+        public void LoopbackProbeServesAuthenticatedBoundedRuntimeRequests()
+        {
+            var session = new PlayerProbeSession("ses_live", Secret, new[] { "state.read" }, 1);
+            using var server = new PlayerProbeServer(session);
+            server.Start();
+            using var client = new TcpClient();
+            client.Connect(IPAddress.Loopback, server.Port);
+            using var stream = client.GetStream();
+            var request = Encoding.UTF8.GetBytes($"{Secret}\tstate.read\n");
+            stream.Write(request, 0, request.Length);
+            using var reader = new StreamReader(stream, Encoding.UTF8, false, 1024, true);
+            StringAssert.StartsWith("ok\thdl_live_0_1", reader.ReadLine());
+            server.Stop();
+            Assert.IsTrue(session.Closed);
         }
     }
 }

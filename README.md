@@ -20,6 +20,10 @@ their own explicit publication metadata.
   state-preserving work on real projects.
 - Codex and Claude Code harnesses use the same published projections and sealed
   task envelope.
+- The checked-in Golden Arena is a playable key-and-exit scene with deterministic
+  seeds, a visible HUD, a build-scene entry, and Unity-tested landmarks.
+- Runtime packages include an authenticated bounded loopback player probe and a
+  live loopback readiness check for allocated multiplayer endpoints.
 
 The repository is a P2 engineering candidate, not a signed P2 release. The
 independent security review, cross-platform Unity campaign, release-authority
@@ -34,6 +38,9 @@ pnpm check
 pnpm conformance:t0
 pnpm unity:test
 pnpm campaign:plan
+pnpm campaign:shard:status -- --plan artifacts/campaigns/p2-plan.json --checkpoint artifacts/campaigns/macos-arm64.json
+# Run one reported slot in a disposable workspace:
+pnpm campaign:harness -- --plan ... --slot ... --task ... --harness ... --workspace ... --model ... --output ...
 # Intentionally exits non-zero until all external P2 gates are satisfied:
 pnpm release:p2:check
 ```
@@ -59,6 +66,12 @@ The release signature binds the candidate, recomputed campaign, verified host
 provenance, review report, and trust fingerprints as one release subject. The
 authority registries are deliberately empty until governance appoints them;
 their trusted fingerprints must be supplied out of band.
+
+The operational details are in [campaign operations](docs/campaign-operations.html)
+and the [release ceremony](docs/release-ceremony.html). P3 clean-room submissions
+now have normative manifest and bundle schemas plus portable build/replay tools;
+see the [P3 protocol](docs/p3-protocol.html). A real unaffiliated submission is
+still required before claiming P3 completion.
 
 Start with [the quickstart](docs/quickstart.html), then read
 [adapter authoring](docs/adapter-authoring.html),

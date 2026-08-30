@@ -1,0 +1,7 @@
+{
+  "name": "Mgds.GoldenArena.Editor",
+  "rootNamespace": "Mgds.GoldenArena.Editor",
+  "references": ["Mgds.GoldenArena.Runtime"],
+  "includePlatforms": ["Editor"],
+  "autoReferenced": true
+}

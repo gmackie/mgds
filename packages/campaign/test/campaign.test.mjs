@@ -11,6 +11,7 @@ import { canonical } from "../../attestation/src/index.mjs";
 import {
   aggregateCampaign,
   buildCampaignPlan,
+  campaignRunAttestationPayload,
   loadCampaignEvidence,
   readBoundedEvidenceFile,
   sealCampaignInputs,
@@ -219,6 +220,15 @@ test("campaign planning creates a stable complete matrix", () => {
     () => buildCampaignPlan({ config, tasks: [task, task], environments }),
     /task identities must be unique/,
   );
+});
+
+test("campaign run attestation payload is canonical and complete", () => {
+  const slot = buildCampaignPlan({ config, tasks: [task], environments }).slots[0];
+  const run = passingRun(slot);
+
+  assert.deepEqual(campaignRunAttestationPayload(run), run.evidenceAttestation.payload);
+  const changed = { ...run, model: `${run.model}-changed` };
+  assert.notEqual(canonical(campaignRunAttestationPayload(changed)), canonical(run.evidenceAttestation.payload));
 });
 
 test("campaign inputs are sealed from repository-owned task and environment bytes", async () => {

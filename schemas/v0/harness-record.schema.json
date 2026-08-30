@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mgds.dev/schemas/v0/harness-record.schema.json",
+  "title": "MGDS harness execution record",
+  "type": "object",
+  "required": ["schema", "slotId", "host", "harness", "model", "status", "changedFiles", "commandsRun", "durationMs", "privateAffordances"],
+  "properties": {
+    "schema": { "const": "mgds.harness-record/v1" },
+    "slotId": { "type": "string", "minLength": 16, "maxLength": 512 },
+    "host": { "enum": ["macos-arm64", "linux-x64", "windows-x64"] },
+    "harness": { "enum": ["codex", "claude-code"] },
+    "model": { "type": "string", "minLength": 1, "maxLength": 120 },
+    "status": { "enum": ["completed", "blocked"] },
+    "changedFiles": { "type": "integer", "minimum": 0, "maximum": 10000 },
+    "commandsRun": { "type": "integer", "minimum": 0, "maximum": 10000 },
+    "durationMs": { "type": "integer", "minimum": 1 },
+    "privateAffordances": { "const": false }
+  },
+  "additionalProperties": false
+}

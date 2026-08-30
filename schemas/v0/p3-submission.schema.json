@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mgds.dev/schemas/v0/p3-submission.schema.json",
+  "title": "MGDS P3 clean-room submission manifest",
+  "type": "object",
+  "required": ["schema", "submissionId", "protocolVersion", "adapter", "toolchain", "host", "t0", "tasks", "eventLedgerHead", "evaluator", "privacy"],
+  "properties": {
+    "schema": { "const": "mgds.p3-submission/v1" },
+    "submissionId": { "type": "string", "pattern": "^mgds\\.submission\\.[a-z0-9.-]+@[0-9]+\\.[0-9]+\\.[0-9]+$" },
+    "protocolVersion": { "type": "string", "pattern": "^0\\.1\\.0-preview\\.[1-9][0-9]*$" },
+    "adapter": { "type": "object", "required": ["id", "sourceRevision"], "properties": { "id": { "type": "string", "pattern": "^mgds\\.adapter\\.[a-z0-9.-]+@[0-9]+\\.[0-9]+\\.[0-9]+$" }, "sourceRevision": { "type": "string", "pattern": "^[a-f0-9]{40}([a-f0-9]{24})?$" } }, "additionalProperties": false },
+    "toolchain": { "type": "object", "required": ["unity"], "properties": { "unity": { "type": "string", "minLength": 1, "maxLength": 64 } }, "additionalProperties": false },
+    "host": { "enum": ["macos-arm64", "linux-x64", "windows-x64"] },
+    "t0": { "type": "object", "required": ["status", "reportHash"], "properties": { "status": { "const": "pass" }, "reportHash": { "$ref": "#/$defs/hash" } }, "additionalProperties": false },
+    "tasks": { "type": "array", "minItems": 1, "items": { "type": "object", "required": ["taskId", "status", "evidenceHash"], "properties": { "taskId": { "type": "string", "minLength": 1 }, "status": { "const": "pass" }, "evidenceHash": { "$ref": "#/$defs/hash" } }, "additionalProperties": false } },
+    "eventLedgerHead": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "evaluator": { "type": "object", "required": ["id", "digest"], "properties": { "id": { "type": "string", "pattern": "^mgds\\.evaluator\\.[a-z0-9.-]+@[0-9]+\\.[0-9]+\\.[0-9]+$" }, "digest": { "$ref": "#/$defs/hash" } }, "additionalProperties": false },
+    "privacy": { "type": "object", "required": ["classification", "redactionVersion"], "properties": { "classification": { "const": "public-redacted" }, "redactionVersion": { "const": "mgds.redaction/v1" } }, "additionalProperties": false }
+  },
+  "$defs": { "hash": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" } },
+  "additionalProperties": false
+}

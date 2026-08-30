@@ -235,6 +235,34 @@ export function aggregateCampaign({ plan, runs, evaluatorAuthorities = {}, trust
   }
 }
 
+export function campaignRunAttestationPayload(run) {
+  return {
+    slotId: run.slotId,
+    campaignId: run.campaignId,
+    taskId: run.taskId,
+    taskHash: run.taskHash,
+    budgetHash: run.budgetHash,
+    environmentHash: run.environmentHash,
+    requiredEvidence: run.requiredEvidence,
+    buildTarget: run.buildTarget,
+    host: run.host,
+    harness: run.harness,
+    seed: run.seed,
+    repetition: run.repetition,
+    runId: run.runId,
+    model: run.model,
+    evidenceHash: run.evidenceHash,
+    verdict: run.verdict,
+    workspaceState: run.workspaceState,
+    orphanProcesses: run.orphanProcesses,
+    privateAffordances: run.privateAffordances,
+    durationMinutes: run.durationMinutes,
+    soak: run.soak,
+    evaluatorId: run.evaluator.id,
+    evaluatorDigest: run.evaluator.digest,
+  };
+}
+
 function validateConfig(config) {
   if (!config?.id) throw new Error("campaign id is required");
   for (const key of ["harnesses", "hosts", "seeds"]) {
@@ -283,31 +311,7 @@ function verifyEvidenceAttestation(run, authorities, trustedFingerprints) {
     const authority = authorities?.[run.evaluator?.id];
     const publicKey = createPublicKey(authority?.publicKey);
     const fingerprint = digest(publicKey.export({ type: "spki", format: "der" }));
-    const expected = {
-      slotId: run.slotId,
-      campaignId: run.campaignId,
-      taskId: run.taskId,
-      taskHash: run.taskHash,
-      budgetHash: run.budgetHash,
-      environmentHash: run.environmentHash,
-      requiredEvidence: run.requiredEvidence,
-      buildTarget: run.buildTarget,
-      host: run.host,
-      harness: run.harness,
-      seed: run.seed,
-      repetition: run.repetition,
-      runId: run.runId,
-      model: run.model,
-      evidenceHash: run.evidenceHash,
-      verdict: run.verdict,
-      workspaceState: run.workspaceState,
-      orphanProcesses: run.orphanProcesses,
-      privateAffordances: run.privateAffordances,
-      durationMinutes: run.durationMinutes,
-      soak: run.soak,
-      evaluatorId: run.evaluator.id,
-      evaluatorDigest: run.evaluator.digest,
-    };
+    const expected = campaignRunAttestationPayload(run);
     if (
       authority?.algorithm !== "Ed25519"
       || attestation?.algorithm !== "Ed25519"

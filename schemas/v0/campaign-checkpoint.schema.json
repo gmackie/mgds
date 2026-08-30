@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mgds.dev/schemas/v0/campaign-checkpoint.schema.json",
+  "title": "MGDS resumable campaign checkpoint",
+  "type": "object",
+  "required": ["schema", "campaignId", "host", "completedSlotIds"],
+  "properties": {
+    "schema": { "const": "mgds.campaign-checkpoint/v1" },
+    "campaignId": { "type": "string", "pattern": "^mgds\\.campaign\\.[a-z0-9.-]+@[0-9]+\\.[0-9]+\\.[0-9]+$" },
+    "host": { "enum": ["macos-arm64", "linux-x64", "windows-x64"] },
+    "completedSlotIds": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 16, "maxLength": 512 } }
+  },
+  "additionalProperties": false
+}

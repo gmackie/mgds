@@ -1,4 +1,4 @@
-import { createHash, createPublicKey, verify } from "node:crypto";
+import { createHash, createPublicKey, sign, verify } from "node:crypto";
 
 import { canonical } from "@mgds/attestation";
 import { aggregateCampaign } from "@mgds/campaign";
@@ -221,6 +221,37 @@ export function buildP2ReviewTarget({
   return { manifest, hash: digest(canonical(manifest)) };
 }
 
+export function buildP2ReviewApprovalPayload(review) {
+  return {
+    status: review.status,
+    independent: review.independent,
+    findings: review.findings,
+    reportHash: review.reportHash,
+    targetHash: review.targetHash,
+    reviewerId: review.reviewer.id,
+  };
+}
+
+export function signP2ReviewApproval(review, privateKey) {
+  if (!privateKey) throw new Error("reviewer private key is required");
+  const value = structuredClone(review);
+  return {
+    ...value,
+    signature: sign(null, Buffer.from(canonical(buildP2ReviewApprovalPayload(value))), privateKey).toString("base64url"),
+  };
+}
+
+export function signP2ReleaseSubject(subjectHash, privateKey) {
+  if (!HASH.test(subjectHash ?? "") || !privateKey) throw new Error("release subject hash and private key are required");
+  return {
+    status: "signed",
+    authority: "mgds-release-authority",
+    algorithm: "Ed25519",
+    subjectHash,
+    signature: sign(null, Buffer.from(subjectHash), privateKey).toString("base64url"),
+  };
+}
+
 function validP2Plan(plan) {
   if (
     plan?.campaignId !== EXPECTED_CAMPAIGN
@@ -287,14 +318,7 @@ function validReviewSignature({ review, reviewerAuthorities, trustedReviewerFing
     const reviewerId = review.reviewer?.id;
     const authority = reviewerAuthorities?.[reviewerId];
     const publicKey = createPublicKey(authority?.publicKey);
-    const payload = {
-      status: review.status,
-      independent: review.independent,
-      findings: review.findings,
-      reportHash: review.reportHash,
-      targetHash: review.targetHash,
-      reviewerId,
-    };
+    const payload = buildP2ReviewApprovalPayload(review);
     if (
       authority?.algorithm !== "Ed25519"
       || review.reviewer?.algorithm !== "Ed25519"

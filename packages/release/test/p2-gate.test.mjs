@@ -4,7 +4,14 @@ import test from "node:test";
 
 import { canonical } from "../../attestation/src/index.mjs";
 import { aggregateCampaign, buildCampaignPlan } from "../../campaign/src/index.mjs";
-import { buildP2ReleaseSubject, buildP2ReviewTarget, evaluateP2ReleaseGate } from "../src/p2-gate.mjs";
+import {
+  buildP2ReleaseSubject,
+  buildP2ReviewApprovalPayload,
+  buildP2ReviewTarget,
+  evaluateP2ReleaseGate,
+  signP2ReleaseSubject,
+  signP2ReviewApproval,
+} from "../src/p2-gate.mjs";
 
 const digest = (value) => `sha256:${createHash("sha256").update(value).digest("hex")}`;
 const fingerprint = (key) => digest(key.export({ type: "spki", format: "der" }));
@@ -232,6 +239,12 @@ function readyInput(overrides = {}) {
     ...overrides,
   };
 }
+
+test("review and release authoring helpers sign the same payloads enforced by the gate", () => {
+  assert.deepEqual(buildP2ReviewApprovalPayload(reviewBase), reviewPayload(reviewBase));
+  assert.deepEqual(signP2ReviewApproval(reviewBase, reviewerKeys.privateKey), review);
+  assert.deepEqual(signP2ReleaseSubject(subject.hash, releaseKeys.privateKey), signing);
+});
 
 test("P2 recomputes and accepts only the complete sealed campaign", () => {
   const ready = evaluateP2ReleaseGate(readyInput());
