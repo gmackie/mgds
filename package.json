@@ -25,6 +25,9 @@
     "check": "pnpm validate:smoke && pnpm schemas:check && pnpm generated:check && pnpm license:check && pnpm test"
   },
   "devDependencies": {
+    "@mgds/attestation": "file:packages/attestation",
+    "@mgds/campaign": "file:packages/campaign",
+    "@mgds/redaction": "file:packages/redaction",
     "ajv": "8.17.1"
   }
 }

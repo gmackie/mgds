@@ -8,6 +8,15 @@ importers:
 
   .:
     devDependencies:
+      '@mgds/attestation':
+        specifier: file:packages/attestation
+        version: link:packages/attestation
+      '@mgds/campaign':
+        specifier: file:packages/campaign
+        version: file:packages/campaign
+      '@mgds/redaction':
+        specifier: file:packages/redaction
+        version: link:packages/redaction
       ajv:
         specifier: 8.17.1
         version: 8.17.1
@@ -60,6 +69,9 @@ importers:
 
 packages:
 
+  '@mgds/campaign@file:packages/campaign':
+    resolution: {directory: packages/campaign, type: directory}
+
   ajv@8.17.1:
     resolution: {integrity: sha512-B/gBuNg5SiMTrPkC+A2+cW0RszwxYmn6VYxB/inlBStS5nx6xHIt/ehKRhIMhqusl7a8LjQoZnjCs5vhwxOQ1g==}
 
@@ -77,6 +89,11 @@ packages:
     engines: {node: '>=0.10.0'}
 
 snapshots:
+
+  '@mgds/campaign@file:packages/campaign':
+    dependencies:
+      '@mgds/redaction': link:packages/redaction
+      ajv: 8.17.1
 
   ajv@8.17.1:
     dependencies:

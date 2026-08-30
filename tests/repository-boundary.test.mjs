@@ -72,6 +72,10 @@ test("runtime artifact ignores do not hide the source artifact package", () => {
 test("Unity UPM packages are not treated as npm workspaces", () => {
   const workspace = readFileSync("pnpm-workspace.yaml", "utf8");
   assert.doesNotMatch(workspace, /Packages\/\*/);
+  assert.doesNotMatch(workspace, /^\s*-\s*["']?packages\/\*["']?\s*$/m);
+  for (const packageName of ["attestation", "campaign", "redaction", "release"]) {
+    assert.match(workspace, new RegExp(`^\\s*-\\s*["']?packages/${packageName}["']?\\s*$`, "m"));
+  }
 });
 
 test("generated sources retain LF on Windows and conformance installs uv", () => {

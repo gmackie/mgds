@@ -3,7 +3,8 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 test("campaign and release packages use declared package dependencies and package-local schemas", async () => {
-  const [campaignSource, campaignPackage, releaseSource, releasePackage] = await Promise.all([
+  const [workspacePackage, campaignSource, campaignPackage, releaseSource, releasePackage] = await Promise.all([
+    readFile("package.json", "utf8").then(JSON.parse),
     readFile("packages/campaign/src/index.mjs", "utf8"),
     readFile("packages/campaign/package.json", "utf8").then(JSON.parse),
     readFile("packages/release/src/p2-gate.mjs", "utf8"),
@@ -16,6 +17,9 @@ test("campaign and release packages use declared package dependencies and packag
   assert.match(releaseSource, /@mgds\/campaign/);
   assert.equal(releasePackage.dependencies["@mgds/attestation"], "workspace:*");
   assert.equal(releasePackage.dependencies["@mgds/campaign"], "workspace:*");
+  assert.equal(workspacePackage.devDependencies["@mgds/attestation"], "file:packages/attestation");
+  assert.equal(workspacePackage.devDependencies["@mgds/campaign"], "file:packages/campaign");
+  assert.equal(workspacePackage.devDependencies["@mgds/redaction"], "file:packages/redaction");
   for (const name of ["campaign-plan", "campaign-run", "campaign-evidence", "campaign-evidence-index"]) {
     const [root, packaged] = await Promise.all([
       readFile(`schemas/v0/${name}.schema.json`, "utf8").then(JSON.parse),

@@ -1,6 +1,22 @@
 packages:
   - "apps/*"
-  - "packages/*"
+  # Keep this allowlist explicit so Unity manifests never become Node workspaces.
+  # Root file dependencies preserve imports when Git coalesces Packages/packages.
+  - "packages/adapter-testkit"
+  - "packages/artifacts"
+  - "packages/attestation"
+  - "packages/broker"
+  - "packages/campaign"
+  - "packages/controller"
+  - "packages/evaluator"
+  - "packages/fault-injector"
+  - "packages/mcp-projection"
+  - "packages/policy"
+  - "packages/protocol-ts"
+  - "packages/redaction"
+  - "packages/release"
+  - "packages/report"
+  - "packages/sandbox"
 
 catalogMode: strict
 cleanupUnusedCatalogs: true
