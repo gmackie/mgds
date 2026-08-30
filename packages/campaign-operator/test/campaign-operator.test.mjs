@@ -91,7 +91,8 @@ test("private signing keys must be regular, owner-only files outside the reposit
     assert.equal((await readExternalPrivateKey({ path, repositoryRoot: repository })).asymmetricKeyType, "ed25519");
     await assert.rejects(readExternalPrivateKey({ path: inside, repositoryRoot: repository }), /outside the repository/);
     await chmod(path, 0o644);
-    await assert.rejects(readExternalPrivateKey({ path, repositoryRoot: repository }), /owner-only/);
+    if (process.platform === "win32") assert.equal((await readExternalPrivateKey({ path, repositoryRoot: repository })).asymmetricKeyType, "ed25519");
+    else await assert.rejects(readExternalPrivateKey({ path, repositoryRoot: repository }), /owner-only/);
     await chmod(path, 0o600);
     await symlink(path, link);
     await assert.rejects(readExternalPrivateKey({ path: link, repositoryRoot: repository }), /regular non-symlink/);
